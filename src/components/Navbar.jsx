@@ -1,12 +1,13 @@
 import { Button } from "antd";
 import styled from "styled-components";
+import {Link} from "react-router-dom"
 
 
 const StyledNav = styled.nav`
   display:flex;
   justify-content: space-between;
   align-items: center;
-  background-image: linear-gradient(to right, #dbfaff,#ADD8E6);
+  background-color: transparent;
   font-size: 18px;
   padding: 15px 100px;
 
@@ -16,8 +17,8 @@ const StyledNav = styled.nav`
 
   ul{
     display:flex;
-    gap: 20px;
-    margin-right: 20px;
+    gap: 40px;
+    margin-right: 40px;
     align-items: center;
 
 
@@ -25,8 +26,6 @@ const StyledNav = styled.nav`
       cursor: pointer;
     }
   }
-
-  
 `
 
 const StyledButton = styled.div`
@@ -46,10 +45,10 @@ const Navbar = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li className="navlist-items">User Guide</li>
-          <li className="navlist-items">Categories</li>
+          <li className="navlist-items"> <Link to='/guide'>User Guide</Link></li>
+          <li className="navlist-items"><Link to='/categories'>Categories</Link></li>
         </ul>
-        <StyledButton> <Button> Register </Button></StyledButton>
+        <StyledButton><Button><Link to='/register'>Register</Link></Button></StyledButton>
       </div>
      </StyledNav>
    );
