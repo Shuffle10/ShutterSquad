@@ -1,7 +1,9 @@
 import { Button } from "antd";
 import styled from "styled-components";
 import {Link} from "react-router-dom"
+import * as Scroll from 'react-scroll';
 
+const InternalLink = Scroll.Link;
 
 const StyledNav = styled.nav`
   display:flex;
@@ -44,7 +46,7 @@ const Navbar = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li className="navlist-items"> <Link to='/guide'>User Guide</Link></li>
+          <li className="navlist-items"> <InternalLink to='guide' smooth={true}>User Guide</InternalLink></li>
           <li className="navlist-items"><Link to='/categories'>Categories</Link></li>
         <StyledButton><Button type="primary"><Link to='/register'>Register</Link></Button></StyledButton>
         <StyledButton><Button type="primary"><Link to='/login'>Login</Link></Button></StyledButton>

@@ -25,7 +25,7 @@ const Home = () => {
         <>
         <HomeBanner/>
         <StyledSection> 
-            <h3>Celebrate your story through photography!</h3>
+            <h3 id="guide">Celebrate your story through photography!</h3>
             <UserGuide/>
         </StyledSection>
         <StyledSection color={"#f7f7f7"}> 
