@@ -4,9 +4,6 @@ const Globalstyle = createGlobalStyle`
             *{
                 margin: 0;
                 padding: 0;
-            }
-
-            body{
                 font-family: 'Lato', sans-serif;
             }
             

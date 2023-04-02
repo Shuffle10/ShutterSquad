@@ -7,7 +7,7 @@ const StyledNav = styled.nav`
   display:flex;
   justify-content: space-between;
   align-items: center;
-  background-color: transparent;
+  background-color: rgb(213 210 207); 
   font-size: 18px;
   padding: 15px 100px;
 
@@ -17,8 +17,7 @@ const StyledNav = styled.nav`
 
   ul{
     display:flex;
-    gap: 40px;
-    margin-right: 40px;
+    gap: 25px;
     align-items: center;
 
 
@@ -41,14 +40,15 @@ const Navbar = () => {
   return ( 
      <StyledNav>
       <div className="logo-container">
-        Logo Here
+        <Link to="/"> ShutterSquad </Link>
       </div>
       <div className="nav-items">
         <ul>
           <li className="navlist-items"> <Link to='/guide'>User Guide</Link></li>
           <li className="navlist-items"><Link to='/categories'>Categories</Link></li>
+        <StyledButton><Button type="primary"><Link to='/register'>Register</Link></Button></StyledButton>
+        <StyledButton><Button type="primary"><Link to='/login'>Login</Link></Button></StyledButton>
         </ul>
-        <StyledButton><Button><Link to='/register'>Register</Link></Button></StyledButton>
       </div>
      </StyledNav>
    );
