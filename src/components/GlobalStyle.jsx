@@ -6,6 +6,10 @@ const Globalstyle = createGlobalStyle`
                 padding: 0;
                 font-family: 'Lato', sans-serif;
             }
+
+            body{
+                min-height: 100vh;
+            }
             
             ul{
                 list-style: none;

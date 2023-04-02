@@ -17,26 +17,26 @@ const Testimonials = () => {
         <div>
         <Image
         height={50+'vh'}
-            src="../../public/images/Testimonials/2.jpg"
+            src="../src/images/Testimonials/2.jpg"
         />
         </div>
         <div>
         <Image
         height={50+'vh'}
 
-            src="../../public/images/Testimonials/3.jpg"
+            src="../src/images/Testimonials/3.jpg"
         />
         </div>
         <div>
         <Image
         height={50+'vh'}
-            src="../../public/images/Testimonials/4.jpg"
+            src="../src/images/Testimonials/4.jpg"
         />
         </div>
         <div>
         <Image
         height={50+'vh'}
-            src="../../public/images/Testimonials/5.jpg"
+            src="../src/images/Testimonials/5.jpg"
         />
         </div>
         </Carousel>

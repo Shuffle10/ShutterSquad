@@ -13,7 +13,6 @@ const layout = {
 const RegisterPhotographer = () => {
 
     const StyledForm = styled.div`
-        height: 100vh;
         background: whitesmoke;
         display: flex;
 
@@ -24,7 +23,7 @@ const RegisterPhotographer = () => {
         .ant-form{
             width: 40%;
             background: white;
-            margin: auto;
+            margin: 60px auto;
             padding: 40px;
             border: 2px solid #e5e5e5;
 
@@ -101,6 +100,12 @@ const RegisterPhotographer = () => {
                     <div>
                     <PlusOutlined />
                     <div style={{ marginTop: 8 }}>Profile Photo</div>
+                    </div>
+                </Upload>
+                <Upload action="/upload.do" listType="picture-card">
+                    <div>
+                    <PlusOutlined />
+                    <div style={{ marginTop: 8 }}>Cover Photo</div>
                     </div>
                 </Upload>
                 </Form.Item>

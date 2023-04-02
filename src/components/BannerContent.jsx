@@ -42,7 +42,7 @@ const BannerContent = () => {
         <h2>Find Professional Photographers Near You!</h2>
         <p>Hire professionals at a price as low as Rs. 10,000</p>
         <form>
-        <Input name="city" placeholder="Search with your city name" />
+        <Input name="city" placeholder="Search with your province name" />
         </form>
         </StyledBannerContent>
         </>

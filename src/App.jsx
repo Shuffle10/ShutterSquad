@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import { Footer } from 'antd/es/layout/layout'
 import { ConfigProvider } from 'antd'
 import styled from 'styled-components'
+import Login from './components/Login'
 
 function App() {
 
@@ -21,20 +22,20 @@ function App() {
 
   return (
 
-      <BrowserRouter>
-      <Globalstyle/>
+    <BrowserRouter>
+    <Globalstyle/>
       <ConfigProvider
         theme={{
           token: {
             colorPrimary: '#1c5b85',
           }
         }}
-      > 
+        > 
       <div className="App">
       <Navbar/>
         <Routes>
           <Route exact path='/' element={<Home/>}/>
-          <Route path='/find' element={<FindPhotographers/>}/>
+          <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<RegisterPhotographer/>}/>
         </Routes>
         <StyledFooter>
