@@ -1,9 +1,5 @@
 import { Carousel, Image } from "antd";
 import styled from "styled-components";
-import testimonial1 from "../../src/images/Testimonials/1.jpg"
-import testimonial2 from "../../src/images/Testimonials/2.jpg"
-import testimonial3 from "../../src/images/Testimonials/3.jpg"
-import testimonial4 from "../../src/images/Testimonials/4.jpg"
 
 
 
@@ -21,26 +17,26 @@ const Testimonials = () => {
         <div>
         <Image
         height={50+'vh'}
-            src={testimonial1}
+            src="../../public/images/Testimonials/5.jpg"
         />
         </div>
         <div>
         <Image
         height={50+'vh'}
 
-            src={testimonial2}
+            src="../../public/images/Testimonials/2.jpg"
         />
         </div>
         <div>
         <Image
         height={50+'vh'}
-            src={testimonial3}
+            src="../../public/images/Testimonials/3.jpg"
         />
         </div>
         <div>
         <Image
         height={50+'vh'}
-            src={testimonial4}
+            src="../../public/images/Testimonials/4.jpg"
         />
         </div>
         </Carousel>

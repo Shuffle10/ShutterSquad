@@ -34,6 +34,7 @@ function App() {
       <Navbar/>
         <Routes>
           <Route exact path='/' element={<Home/>}/>
+          <Route exact path='/ShutterSquad' element={<Home/>}/>   
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<RegisterPhotographer/>}/>
         </Routes>

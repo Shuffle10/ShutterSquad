@@ -1,12 +1,7 @@
 import styled from "styled-components";
 import { CameraOutlined, VideoCameraOutlined, DollarOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { Avatar,Card, Button } from 'antd';
-import Avatar1 from "../../src/images/Profile/Avatar/1.jpg";
-import Avatar2 from "../../src/images/Profile/Avatar/2.jpeg";
-import Avatar3 from "../../src/images/Profile/Avatar/3.jpeg";
-import Cover1 from "../../src/images/Profile/Cover/1.jpg";
-import Cover2 from "../../src/images/Profile/Cover/2.jpg";
-import Cover3 from "../../src/images/Profile/Cover/3.jpg";
+
 
 
 const { Meta } = Card;
@@ -37,8 +32,8 @@ const PopularProfiles = () => {
             city: "Kathmandu",
             fees : 20000,
             per: "day",
-            coverPhoto: Cover1,
-            avatar: Avatar1,
+            coverPhoto: "/images/Profile/Cover/1.jpg",
+            avatar: "/images/Profile/Avatar/1.jpg",
             location : "Nagarjun, Kathmandu"
         },
 
@@ -49,8 +44,8 @@ const PopularProfiles = () => {
             city: "Butwal",
             fees : 1000,
             per: "hour",
-            coverPhoto: Cover2,
-            avatar: Avatar2,
+            coverPhoto: "/images/Profile/Cover/2.jpg",
+            avatar: "/images/Profile/Avatar/2.jpeg",
             location : "Batauli Bazar, Butwal"
 
         },
@@ -62,8 +57,8 @@ const PopularProfiles = () => {
             city: "Jhapa",
             fees : 50000,
             per: "day",
-            coverPhoto:Cover3,
-            avatar: Avatar3,
+            coverPhoto:"/images/Profile/Cover/3.jpg",
+            avatar: "/images/Profile/Avatar/3.jpeg",
             location : "Damak, Jhapa"
 
         }
@@ -81,7 +76,7 @@ const PopularProfiles = () => {
                         hoverable
                         cover={
                         <img
-                            alt="example"
+                            alt="Cover Photo"
                             src={profile.coverPhoto}
                         />
                         }
