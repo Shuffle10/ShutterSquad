@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CameraOutlined, VideoCameraOutlined, DollarOutlined, EnvironmentO, EnvironmentOutlinedutlined } from '@ant-design/icons';
+import { CameraOutlined, VideoCameraOutlined, DollarOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { Avatar,Card, Button } from 'antd';
 const { Meta } = Card;
 
@@ -29,8 +29,8 @@ const PopularProfiles = () => {
             city: "Kathmandu",
             fees : 20000,
             per: "day",
-            coverPhoto: "../src/images/Profile/Cover/1.jpg",
-            avatar: "../src/images/Profile/Avatar/1.jpg",
+            coverPhoto: "../../src/images/Profile/Cover/1.jpg",
+            avatar: "../../src/images/Profile/Avatar/1.jpg",
             location : "Nagarjun, Kathmandu"
         },
 
@@ -41,8 +41,8 @@ const PopularProfiles = () => {
             city: "Butwal",
             fees : 1000,
             per: "hour",
-            coverPhoto: "../src/images/Profile/Cover/2.jpg",
-            avatar: "../src/images/Profile/Avatar/2.jpeg",
+            coverPhoto: "../../src/images/Profile/Cover/2.jpg",
+            avatar: "../../src/images/Profile/Avatar/2.jpeg",
             location : "Batauli Bazar, Butwal"
 
         },
@@ -54,8 +54,8 @@ const PopularProfiles = () => {
             city: "Jhapa",
             fees : 50000,
             per: "day",
-            coverPhoto: "../src/images/Profile/Cover/3.jpg",
-            avatar: "../src/images/Profile/Avatar/3.jpeg",
+            coverPhoto: "../../src/images/Profile/Cover/3.jpg",
+            avatar: "../../src/images/Profile/Avatar/3.jpeg",
             location : "Damak, Jhapa"
 
         }
@@ -81,7 +81,7 @@ const PopularProfiles = () => {
                             actions={[
                                 <> <DollarOutlined/>{profile.fees}/{profile.per}</>,
                                 <>  <CameraOutlined style={{display: "inline"}}/>&nbsp;&nbsp;/&nbsp;&nbsp;<VideoCameraOutlined style={{display: "inline"}}/> <br/><span>{profile.specialization}</span></>,
-                                <> <EnvironmentOutlined />{profile.province}</>,
+                                <> <EnvironmentOutlined/>{profile.province}</>,
                                 ]}
                     >
                         <Meta
