@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
-import FindPhotographers from './components/FindPhotographers'
 import RegisterPhotographer from './components/Register'
 import Globalstyle from './components/GlobalStyle'
 import Navbar from './components/Navbar'

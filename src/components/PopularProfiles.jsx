@@ -29,8 +29,8 @@ const PopularProfiles = () => {
             city: "Kathmandu",
             fees : 20000,
             per: "day",
-            coverPhoto: "../../src/images/Profile/Cover/1.jpg",
-            avatar: "../../src/images/Profile/Avatar/1.jpg",
+            coverPhoto: "../../ShutterSquad/src/images/Profile/Cover/1.jpg",
+            avatar: "../../ShutterSquad/src/images/Profile/Avatar/1.jpg",
             location : "Nagarjun, Kathmandu"
         },
 
@@ -41,8 +41,8 @@ const PopularProfiles = () => {
             city: "Butwal",
             fees : 1000,
             per: "hour",
-            coverPhoto: "../../src/images/Profile/Cover/2.jpg",
-            avatar: "../../src/images/Profile/Avatar/2.jpeg",
+            coverPhoto: "../../ShutterSquad/src/images/Profile/Cover/2.jpg",
+            avatar: "../../ShutterSquad/src/images/Profile/Avatar/2.jpeg",
             location : "Batauli Bazar, Butwal"
 
         },
@@ -54,8 +54,8 @@ const PopularProfiles = () => {
             city: "Jhapa",
             fees : 50000,
             per: "day",
-            coverPhoto: "../../src/images/Profile/Cover/3.jpg",
-            avatar: "../../src/images/Profile/Avatar/3.jpeg",
+            coverPhoto: "../../ShutterSquad/src/images/Profile/Cover/3.jpg",
+            avatar: "../../ShutterSquad/src/images/Profile/Avatar/3.jpeg",
             location : "Damak, Jhapa"
 
         }
