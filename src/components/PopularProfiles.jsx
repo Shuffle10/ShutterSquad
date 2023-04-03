@@ -32,8 +32,8 @@ const PopularProfiles = () => {
             city: "Kathmandu",
             fees : 20000,
             per: "day",
-            coverPhoto: "/images/Profile/Cover/1.jpg",
-            avatar: "/images/Profile/Avatar/1.jpg",
+            coverPhoto: `${import.meta.env.BASE_URL}/images/Profile/Cover/1.jpg`,
+            avatar: `${import.meta.env.BASE_URL}/images/Profile/Avatar/1.jpg`,
             location : "Nagarjun, Kathmandu"
         },
 
@@ -44,8 +44,8 @@ const PopularProfiles = () => {
             city: "Butwal",
             fees : 1000,
             per: "hour",
-            coverPhoto: "/images/Profile/Cover/2.jpg",
-            avatar: "/images/Profile/Avatar/2.jpeg",
+            coverPhoto: `${import.meta.env.BASE_URL}/images/Profile/Cover/2.jpg`,
+            avatar: `${import.meta.env.BASE_URL}/images/Profile/Avatar/2.jpeg`,
             location : "Batauli Bazar, Butwal"
 
         },
@@ -57,8 +57,8 @@ const PopularProfiles = () => {
             city: "Jhapa",
             fees : 50000,
             per: "day",
-            coverPhoto:"/images/Profile/Cover/3.jpg",
-            avatar: "/images/Profile/Avatar/3.jpeg",
+            coverPhoto:`${import.meta.env.BASE_URL}/images/Profile/Cover/3.jpg`,
+            avatar: `${import.meta.env.BASE_URL}/images/Profile/Avatar/3.jpeg`,
             location : "Damak, Jhapa"
 
         }
