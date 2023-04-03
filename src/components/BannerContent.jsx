@@ -2,6 +2,8 @@ import { Input } from "antd";
 import styled from "styled-components";
 
 
+
+
 const StyledBannerContent = styled.div`
     display: flex;
     flex-direction: column;
