@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bannerImage from "../../public/images/banner.jpeg"
+import bannerImage from "../../src/images/Banner/banner.jpeg"
 import Navbar from "./Navbar";
 import BannerContent from "./BannerContent";
 

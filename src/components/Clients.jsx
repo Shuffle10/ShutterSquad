@@ -1,4 +1,3 @@
-import { Row } from "antd";
 import styled from "styled-components";
 
 const StyledRow = styled.div`
@@ -10,7 +9,7 @@ const StyledRow = styled.div`
    }
 
    img{
-      height: 150px;
+      height: 100px;
    }
 `
 

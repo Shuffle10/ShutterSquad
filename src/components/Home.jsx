@@ -4,6 +4,7 @@ import styled from "styled-components";
 import PopularProfiles from "./PopularProfiles";
 import Testimonials from "./Testimonials"
 import Clients from "./Clients";
+import WhyUs from "./WhyUs";
 
 
 
@@ -32,13 +33,16 @@ const Home = () => {
             <PopularProfiles/>
         </StyledSection>
         <StyledSection>
-            <h3>Our Trusted Partners</h3>
-            <Clients/>
+            <h3>Why ShutterSquad?</h3>
+            <WhyUs/>
         </StyledSection>
-        <StyledSection color={"#f7f7f7"}>
+        <StyledSection  color={"#f7f7f7"}>
             <Testimonials/>
-        </StyledSection>
-        
+        </StyledSection> 
+        <StyledSection>
+        <h3>Our Valuable Clients</h3>
+            <Clients/>
+        </StyledSection>       
         </>
      );
 }

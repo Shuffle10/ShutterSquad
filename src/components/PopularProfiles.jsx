@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { CameraOutlined, VideoCameraOutlined, DollarOutlined, PushpinOutlined } from '@ant-design/icons';
-import { Avatar,Card, Row, Col } from 'antd';
+import { CameraOutlined, VideoCameraOutlined, DollarOutlined, EnvironmentO, EnvironmentOutlinedutlined } from '@ant-design/icons';
+import { Avatar,Card, Button } from 'antd';
 const { Meta } = Card;
 
 const StyledCard = styled.div`
@@ -9,6 +9,13 @@ const StyledCard = styled.div`
 const CardWrapper = styled.div`
     display: flex;
     justify-content: space-between;
+`
+const StyledButton = styled.div`
+  .ant-btn{
+    height: 40px;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+  }
 `
 
 
@@ -23,8 +30,8 @@ const PopularProfiles = () => {
             fees : 20000,
             per: "day",
             coverPhoto: "../src/images/Profile/Cover/1.jpg",
-            avatar: "../src/images/Profile/Avatar/1.jpg"
-
+            avatar: "../src/images/Profile/Avatar/1.jpg",
+            location : "Nagarjun, Kathmandu"
         },
 
         {
@@ -35,8 +42,8 @@ const PopularProfiles = () => {
             fees : 1000,
             per: "hour",
             coverPhoto: "../src/images/Profile/Cover/2.jpg",
-            avatar: "../src/images/Profile/Avatar/2.jpeg"
-
+            avatar: "../src/images/Profile/Avatar/2.jpeg",
+            location : "Batauli Bazar, Butwal"
 
         },
 
@@ -48,18 +55,22 @@ const PopularProfiles = () => {
             fees : 50000,
             per: "day",
             coverPhoto: "../src/images/Profile/Cover/3.jpg",
-            avatar: "../src/images/Profile/Avatar/3.jpeg"
+            avatar: "../src/images/Profile/Avatar/3.jpeg",
+            location : "Damak, Jhapa"
 
         }
     ];
 
 
     return ( 
+    <>
+        {/* <FeaturedSection> */}
             <CardWrapper>
             {profiles.map((profile)=>(
                 <>
                     <StyledCard>
                     <Card
+                        hoverable
                         cover={
                         <img
                             alt="example"
@@ -68,21 +79,24 @@ const PopularProfiles = () => {
                         }
 
                             actions={[
-                                <> <DollarOutlined/> <span>{profile.fees}/{profile.per}</span></>,
+                                <> <DollarOutlined/>{profile.fees}/{profile.per}</>,
                                 <>  <CameraOutlined style={{display: "inline"}}/>&nbsp;&nbsp;/&nbsp;&nbsp;<VideoCameraOutlined style={{display: "inline"}}/> <br/><span>{profile.specialization}</span></>,
-                                <> <PushpinOutlined /> <span>{profile.province}</span></>,
+                                <> <EnvironmentOutlined />{profile.province}</>,
                                 ]}
                     >
                         <Meta
                         avatar={<Avatar src={profile.avatar} />}
                         title={profile.name}
+                        description={profile.location}
                         />
                     </Card>
                     </StyledCard>
                 </>
             ))}
             </CardWrapper>
-
+            <StyledButton><Button type="primary" style={{display:"block", margin:"0px auto", marginTop:"50px"}}> View More </Button> </StyledButton>
+            {/* </FeaturedSection>    */}
+            </>                    
     );
 }
  

@@ -10,6 +10,13 @@ const layout = {
     wrapperCol: { span: 16 },
   };
 
+const rules = [
+    {
+    required: true,
+    message: 'This field is required',
+    },
+]
+
 const RegisterPhotographer = () => {
 
     const StyledForm = styled.div`
@@ -36,8 +43,12 @@ const RegisterPhotographer = () => {
                 font-size:18px;
             }
 
-            input{
-                min-width: 400px
+            // input{
+            //     min-width: 400px
+            // }
+
+            .ant-form-item-control-input-content{
+                display: flex;
             }
         }
     `
@@ -54,29 +65,29 @@ const RegisterPhotographer = () => {
             {...layout}
             >
             <h3>  Register as a Photographer</h3>
-                <Form.Item label="Name" rules={[{ required: true}]}>
+                <Form.Item label="Name" rules={rules}>
                 <Input/>
                 </Form.Item>
-                <Form.Item label="Age" rules={[{ required: true}]}>
-                <InputNumber/>
+                <Form.Item label="Age" rules={rules}>
+                <InputNumber  min={16} max={80}/>
                 </Form.Item>
-                <Form.Item label="Email" rules={[{ required: true}]}>
+                <Form.Item label="Email" rules={rules}>
                 <Input/>
                 </Form.Item>
-                <Form.Item label="Phone Number" rules={[{ required: true}]}>
+                <Form.Item label="Phone Number" rules={rules}>
                 <Input/>
                 </Form.Item>
-                <Form.Item label="Gender" rules={[{ required: true}]}>
+                <Form.Item label="Gender" rules={rules}>
                 <Radio.Group>
                     <Radio value="male"> Male </Radio>
                     <Radio value="female"> Female </Radio>
                     <Radio value="others"> Others </Radio>
                 </Radio.Group>
                 </Form.Item>
-                <Form.Item label="Address" rules={[{ required: true}]}>
+                <Form.Item label="Address" rules={rules}>
                 <Input/>
                 </Form.Item>
-                <Form.Item label="Province" rules={[{ required: true}]}>
+                <Form.Item label="Province" rules={rules}>
                 <Select>
                     <Select.Option value="sudurpaschim">Sudurpaschim</Select.Option>
                     <Select.Option value="karnali">Karnali</Select.Option>
@@ -88,24 +99,49 @@ const RegisterPhotographer = () => {
 
                 </Select>
                 </Form.Item>
-                <Form.Item label="Specialization" rules={[{ required: true, message: 'Please input your username!' }]}>
+                <Form.Item label="Specialization" rules={rules}>
                 <Select>
                     <Select.Option value="photography">Photography</Select.Option>
                     <Select.Option value="videography">Videography</Select.Option>
                     <Select.Option value="both">Both</Select.Option>
                 </Select>
                 </Form.Item>
-                <Form.Item label="Upload" valuePropName="fileList" rules={[{ required: true}]}>
+                <Form.Item label="Charge" rules={rules}>
+                <Input.Group compact>
+                <Form.Item
+                    name={['charge', 'amount']}
+                    noStyle
+                    >
+                <InputNumber
+                    style={{
+                        width: '30%',
+                    }}
+                    placeholder="Amount"
+                    min={0}
+                />
+                </Form.Item>
+                    <Form.Item
+                    name={['charge', 'basis']}
+                    noStyle
+                    >
+                    <Select placeholder="Basis">
+                    <Select.Option value="day">Day</Select.Option>
+                    <Select.Option value="hour">Hour</Select.Option>
+                </Select>
+                </Form.Item>
+                </Input.Group>
+                </Form.Item>
+                <Form.Item label="Upload" valuePropName="fileList" rules={rules}>
                 <Upload action="/upload.do" listType="picture-card">
                     <div>
                     <PlusOutlined />
-                    <div style={{ marginTop: 8 }}>Profile Photo</div>
+                    <div style={{marginTop: 8}}>Profile Photo</div>
                     </div>
                 </Upload>
                 <Upload action="/upload.do" listType="picture-card">
                     <div>
                     <PlusOutlined />
-                    <div style={{ marginTop: 8 }}>Cover Photo</div>
+                    <div style={{ marginTop: 8}}>Cover Photo</div>
                     </div>
                 </Upload>
                 </Form.Item>
