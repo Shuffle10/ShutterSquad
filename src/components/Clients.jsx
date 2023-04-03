@@ -19,7 +19,7 @@ const Clients = () => {
      <>
      <StyledRow>
      <div className="client-row">
-        <img src="../public/images/Clients/1.png"></img>
+        <img src={`${import.meta.env.BASE_URL}/images/Clients/1.png`}></img>
         <img src="https://www.freepnglogos.com/uploads/apple-logo-png/apple-logo-png-dallas-shootings-don-add-are-speech-zones-used-4.png"></img>
         <img src="../public/images/Clients/3.png"></img>
         <img src="../public/images/Clients/4.png"></img>
