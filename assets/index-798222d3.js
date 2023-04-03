@@ -424,7 +424,7 @@ html body {
    img{
       height: 100px;
    }
-`,pK=()=>J(vr,{children:J(fK,{children:dt("div",{className:"client-row",children:[J("img",{src:"/images/Clients/1.png"}),J("img",{src:"https://www.freepnglogos.com/uploads/apple-logo-png/apple-logo-png-dallas-shootings-don-add-are-speech-zones-used-4.png"}),J("img",{src:"/images/Clients/3.png"}),J("img",{src:"/images/Clients/4.png"}),J("img",{src:"https://www.freepnglogos.com/uploads/chanel-logo-emblem-1.jpg"}),J("img",{src:"https://www.freepnglogos.com/uploads/pepsi-png-logo/pepsi-logo-pepsi-symbol-meaning-history-png-logo-3.png"})]})})}),mK=Tn.div`
+`,pK=()=>J(vr,{children:J(fK,{children:dt("div",{className:"client-row",children:[J("img",{src:"/public/images/Clients/1.png"}),J("img",{src:"https://www.freepnglogos.com/uploads/apple-logo-png/apple-logo-png-dallas-shootings-don-add-are-speech-zones-used-4.png"}),J("img",{src:"/public/images/Clients/3.png"}),J("img",{src:"/public/images/Clients/4.png"}),J("img",{src:"https://www.freepnglogos.com/uploads/chanel-logo-emblem-1.jpg"}),J("img",{src:"https://www.freepnglogos.com/uploads/pepsi-png-logo/pepsi-logo-pepsi-symbol-meaning-history-png-logo-3.png"})]})})}),mK=Tn.div`
     display: flex;
     justify-content: center;
     gap: 200px;
