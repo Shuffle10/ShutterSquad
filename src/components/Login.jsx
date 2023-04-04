@@ -1,5 +1,5 @@
 import { Form, Input, Button} from "antd";
-import { KeyOutlined, MailOutlined} from '@ant-design/icons';
+import { MailOutlined, KeyOutlined } from "@ant-design/icons";
 import { Link} from "react-router-dom";
 import styled from "styled-components";
 
@@ -30,6 +30,10 @@ const StyledForm = styled.div`
                 font-size:18px;
             }
 
+            a{
+                color: black;
+            }
+
             // input{
             //     min-width: 400px
             // }
@@ -37,7 +41,6 @@ const StyledForm = styled.div`
     `
 
 const layout = {
-        labelCol: { span: 5 },
         wrapperCol: { span: 16 },
       };
     
@@ -47,22 +50,22 @@ const Login = () => {
     return ( 
         <StyledForm>
             <Form
-            {...layout}
+            // {...layout}
             >
             <h3>  Log In as a Photographer</h3>
-                <Form.Item label="Email" rules={[{ required: true}]}>
-                <Input />
+                <Form.Item  rules={[{ required: true}]}>
+                <Input prefix={<MailOutlined/>}/>
                 </Form.Item>
-                <Form.Item label="Password" rules={[{ required: true}]}>
-                <Input.Password/>
+                <Form.Item rules={[{ required: true}]}>
+                <Input.Password prefix={<KeyOutlined/>}/>
                 </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 5 }}>
+                <Form.Item>
                 <Button block type="primary" htmlType="submit">
                     Log In
                 </Button>
                 </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 5 }}>
-                <p> Don't have an account? <Link to="/login"> <b> Register </b></Link> Instead </p>
+                <Form.Item>
+                <p style={{textAlign:"center"}}> Don't have an account? <Link to="/login"> <b> Register </b></Link> Instead </p>
                 </Form.Item>
             </Form>
         </StyledForm>

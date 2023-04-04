@@ -1,11 +1,7 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import {StyledSection} from "./StyledSection";
-import { Layout, Menu, Avatar, Row, Col, Divider, Space } from 'antd';
-import { Link } from "react-router-dom";
-import { LeftOutlined } from "@ant-design/icons";
-
-const {Sider, Content} = Layout;
+import { Affix } from 'antd';
+import PhotographerInfo from "./PhotographerInfo";
 
 
 
@@ -19,6 +15,8 @@ const CoverWrapper = styled.div`
     }
 `
 
+
+
 const Profile = () => {
     
     const {id} = useParams()
@@ -26,6 +24,9 @@ const Profile = () => {
         {
             id: 1,
             name: "Saphal Pant",
+            age: 19,
+            email: "saphal@gmail.com",
+            phone: "9845385206",
             province: "Bagmati",
             specialization: "Photography",
             city: "Kathmandu",
@@ -39,6 +40,9 @@ const Profile = () => {
         {
             id: 2,
             name: "Roshan Giri",
+            age: 19,
+            email: "saphal@gmail.com",
+            phone: "9845385206",
             province: "Lumbini",
             specialization: "Videography",
             city: "Butwal",
@@ -53,6 +57,9 @@ const Profile = () => {
         {
             id: 3,
             name: "Rojan Raj",
+            age: 19,
+            email: "saphal@gmail.com",
+            phone: "9845385206",
             province: "Koshi",
             specialization: "Photography",
             city: "Jhapa",
@@ -65,6 +72,8 @@ const Profile = () => {
         }
     ];
 
+    
+
     return ( 
         <>
             {(profiles.filter((e)=>e.id==id)).map((profile)=>(
@@ -72,30 +81,9 @@ const Profile = () => {
                 <CoverWrapper>
                 <img src={profile.coverPhoto}/>
                 </CoverWrapper>
-                <StyledSection>
-                    <Layout>
-                    <Content style={{ padding: '30px', minHeight: 280 }}>
-                    <Space direction="vertical" size={30} style={{ display: 'flex'}}>
-                        <p> <Link to='/' style={{color: "#1c5b85"}}> <LeftOutlined /> Back to Homepage </Link> </p>
-                        <Row align="middle">
-                        <Col span={6}><Avatar src={profile.avatar} size={150}/> </Col>
-                        <Col span={12}>
-                            <Space direction="vertical" size={10}>
-                            <h2>Hi my name is {profile.name}</h2>
-                            <p style={{fontSize:"15px"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ad ea in inventore quisquam amet repudiandae incidunt voluptatum cumque atque maiores consectetur sunt voluptas, dignissimos totam? Ex sed magnam nostrum illum voluptatibus provident, laborum amet?</p>
-                            </Space>
-                        </Col>
-                        </Row>
-                    <Divider/>
-                    </Space>
-                    </Content>
-                    <Sider style={{ background: "gray" }} width={500}>
-                        Calendar and Important Note
-                    </Sider>
-                    </Layout>
-                </StyledSection>
-
-                {/* <p> I am good at {profile.specialization}</p> */}
+                
+                        <PhotographerInfo profile={profile}/>
+                
                 </>
             ))}
         </>
