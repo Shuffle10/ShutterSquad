@@ -22,7 +22,7 @@ function App() {
 
   return (
 
-    <BrowserRouter>
+    <BrowserRouter basename="/ShutterSquad">
     <Globalstyle/>
       <ConfigProvider
         theme={{
@@ -35,7 +35,6 @@ function App() {
       <Navbar/>
         <Routes>
           <Route exact path='/' element={<Home/>}/>
-          <Route exact path='/ShutterSquad' element={<Home/>}/>   
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<RegisterPhotographer/>}/>
           <Route path='/profile/:id' element={<Profile/>}/>
