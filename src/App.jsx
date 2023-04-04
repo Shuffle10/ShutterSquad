@@ -8,6 +8,7 @@ import { Footer } from 'antd/es/layout/layout'
 import { ConfigProvider } from 'antd'
 import styled from 'styled-components'
 import Login from './components/Login'
+import Profile from './components/Profile'
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           <Route exact path='/ShutterSquad' element={<Home/>}/>   
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<RegisterPhotographer/>}/>
+          <Route path='/profile/:id' element={<Profile/>}/>
         </Routes>
         <StyledFooter>
         <Footer>

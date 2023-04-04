@@ -5,13 +5,22 @@ import * as Scroll from 'react-scroll';
 
 const InternalLink = Scroll.Link;
 
-const StyledNav = styled.nav`
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(213 210 207); 
-  font-size: 18px;
-  padding: 15px 100px;
+const NavWrapper = styled.div`
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+
+  nav{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: transparent ; 
+      // rgb(213 210 207)
+      font-size: 18px;
+      padding: 15px 100px;
+      font-size: 20px;
+
+
 
   .nav-items{
     display: flex;
@@ -24,23 +33,26 @@ const StyledNav = styled.nav`
 
 
     .navlist-items{
+      color: white;
       cursor: pointer;
     }
   }
+}
 `
 
 const StyledButton = styled.div`
   .ant-btn{
     height: 40px;
     font-family: 'Lato', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
   }
 `
 
 
 const Navbar = () => {
   return ( 
-     <StyledNav>
+     <NavWrapper>
+      <nav>
       <div className="logo-container">
         <Link to="/"> ShutterSquad </Link>
       </div>
@@ -52,7 +64,8 @@ const Navbar = () => {
         <StyledButton><Button type="primary"><Link to='/login'>Login</Link></Button></StyledButton>
         </ul>
       </div>
-     </StyledNav>
+      </nav>
+     </NavWrapper>
    );
 }
  

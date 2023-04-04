@@ -17,7 +17,7 @@ const Globalstyle = createGlobalStyle`
 
             a{
                 text-decoration: none;
-                color: black;
+                color: white;
             }
             
             `

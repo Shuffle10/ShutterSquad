@@ -5,7 +5,8 @@ import BannerContent from "./BannerContent";
 
 
 const StyledBanner = styled.div`
-    height: 95vh;
+    position: relative;
+    height: 100vh;
     background-image: url(${bannerImage});
     background-repeat: no-repeat;
     background-size: cover;

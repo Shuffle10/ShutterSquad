@@ -5,21 +5,8 @@ import PopularProfiles from "./PopularProfiles";
 import Testimonials from "./Testimonials"
 import Clients from "./Clients";
 import WhyUs from "./WhyUs";
+import {StyledSection} from "./StyledSection";
 
-
-
-const StyledSection = styled.section`
-    padding: 150px 250px;
-    background-color: ${props=>props.color};
-    
-
-    h3{
-        text-align: center;
-        margin-bottom: 100px;
-        font-size: 45px;
-        color: #1c5b85;
-    }
-`
 
 const Home = () => {
     return ( 

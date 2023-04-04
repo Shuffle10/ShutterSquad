@@ -19,10 +19,10 @@ const StyledSteps = styled.div`
     }
 
     .ant-steps-item-title{
-        font-size: 32px;
+        font-size: 28px;
     }
     .ant-steps-item-description{
-        font-size: 24px;
+        font-size: 20px;
     }
 `
 const WhyUs = () => {

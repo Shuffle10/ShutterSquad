@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { CameraOutlined, VideoCameraOutlined, DollarOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { Avatar,Card, Button } from 'antd';
-
-
-
+import {Link} from 'react-router-dom'
 const { Meta } = Card;
+
+
 
 const StyledCard = styled.div`
     width: 400px;
@@ -26,6 +26,7 @@ const PopularProfiles = () => {
 
     const profiles = [
         {
+            id: 1,
             name: "Saphal Pant",
             province: "Bagmati",
             specialization: "Photography",
@@ -38,6 +39,7 @@ const PopularProfiles = () => {
         },
 
         {
+            id: 2,
             name: "Roshan Giri",
             province: "Lumbini",
             specialization: "Videography",
@@ -51,6 +53,7 @@ const PopularProfiles = () => {
         },
 
         {
+            id: 3,
             name: "Rojan Raj",
             province: "Koshi",
             specialization: "Photography",
@@ -67,11 +70,11 @@ const PopularProfiles = () => {
 
     return ( 
     <>
-        {/* <FeaturedSection> */}
             <CardWrapper>
             {profiles.map((profile)=>(
                 <>
                     <StyledCard>
+                    <Link to={`/profile/${profile.id}`}>
                     <Card
                         hoverable
                         cover={
@@ -93,12 +96,12 @@ const PopularProfiles = () => {
                         description={profile.location}
                         />
                     </Card>
+                    </Link>
                     </StyledCard>
                 </>
             ))}
             </CardWrapper>
             <StyledButton><Button type="primary" style={{display:"block", margin:"0px auto", marginTop:"50px"}}> View More </Button> </StyledButton>
-            {/* </FeaturedSection>    */}
             </>                    
     );
 }
