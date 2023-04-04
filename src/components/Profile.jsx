@@ -1,6 +1,11 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import {StyledSection} from "./StyledSection";
+import { Layout, Menu, Avatar, Row, Col, Divider, Space } from 'antd';
+import { Link } from "react-router-dom";
+import { LeftOutlined } from "@ant-design/icons";
+
+const {Sider, Content} = Layout;
 
 
 
@@ -68,11 +73,29 @@ const Profile = () => {
                 <img src={profile.coverPhoto}/>
                 </CoverWrapper>
                 <StyledSection>
-
+                    <Layout>
+                    <Content style={{ padding: '30px', minHeight: 280 }}>
+                    <Space direction="vertical" size={30} style={{ display: 'flex'}}>
+                        <p> <Link to='/' style={{color: "#1c5b85"}}> <LeftOutlined /> Back to Homepage </Link> </p>
+                        <Row align="middle">
+                        <Col span={6}><Avatar src={profile.avatar} size={150}/> </Col>
+                        <Col span={12}>
+                            <Space direction="vertical" size={10}>
+                            <h2>Hi my name is {profile.name}</h2>
+                            <p style={{fontSize:"15px"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ad ea in inventore quisquam amet repudiandae incidunt voluptatum cumque atque maiores consectetur sunt voluptas, dignissimos totam? Ex sed magnam nostrum illum voluptatibus provident, laborum amet?</p>
+                            </Space>
+                        </Col>
+                        </Row>
+                    <Divider/>
+                    </Space>
+                    </Content>
+                    <Sider style={{ background: "gray" }} width={500}>
+                        Calendar and Important Note
+                    </Sider>
+                    </Layout>
                 </StyledSection>
 
-                {/* <h2>Hi my name is {profile.name}</h2>
-                <p> I am good at {profile.specialization}</p> */}
+                {/* <p> I am good at {profile.specialization}</p> */}
                 </>
             ))}
         </>

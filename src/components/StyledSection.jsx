@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 
 export const StyledSection = styled.section`
-padding: 150px 250px;
+padding: 120px 250px;
 background-color: ${props=>props.color};
 
 
