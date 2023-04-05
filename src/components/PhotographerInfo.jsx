@@ -20,7 +20,7 @@ const PhotographerInfo = ({profile}) => {
                     <Space direction="vertical" size={30} style={{ display: 'flex'}}>
                         <p> <Link to='/' style={{color: "#1c5b85"}}> <LeftOutlined /> Back to Homepage </Link> </p>
                         <Row align="middle">
-                        <Col span={6}><Avatar src={profile.avatar} size={150}/> </Col>
+                        <Col span={9}><Avatar src={profile.avatar} size={150}/> </Col>
                         <Col span={15}>
                             <Space direction="vertical" size={10}>
                             <h2>Hi my name is {profile.name}</h2>
