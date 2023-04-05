@@ -1,10 +1,11 @@
 import { Form, Input, InputNumber, Radio, Select, Upload, Button} from "antd";
 import { PlusOutlined,  } from '@ant-design/icons';
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import bannerImage from "/images/Banner/banner.jpeg"
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useHis } from "react";
 import { registerPhotographer } from "../services/clientAPI";
+
 
 
 const layout = {
@@ -12,12 +13,7 @@ const layout = {
     wrapperCol: { span: 14 },
   };
 
-const rules = [
-    {
-    required: true,
-    message: 'This field is required',
-    }
-]
+
 
 const FormWrapper = styled.div`
     background-image: url(${bannerImage});
@@ -73,6 +69,8 @@ const StyledForm = styled.div`
 `
 const RegisterPhotographer = () => {
 
+    const navigate = useNavigate()
+
     const defaultValue = {
         name: "",
         email: "",
@@ -81,12 +79,23 @@ const RegisterPhotographer = () => {
         gender: "",
     }
 
+    const rules = [
+        {
+        required: true,
+        message: 'This field is required',
+        },
+    ]
+
 
     const handleSubmit = async ()=>{
+        form.validateFields();
+        console.log("Submit")
         setLoading(true)
+        console.log(loading)
         const user = {fullName, age, email, phone, gender, specialization, address, province, amount, basis}
         await registerPhotographer(user);
         setLoading(false)
+        navigate('/')
     }
 
     const [fullName, setName] = useState('');
@@ -101,39 +110,41 @@ const RegisterPhotographer = () => {
     const [basis, setBasis] = useState('');
 
     const [loading, setLoading] = useState(false)
-
+    const [form] = Form.useForm();
 
 
     return ( 
         <FormWrapper>
         <StyledForm>
             <Form
+            form={form}
             {...layout}
+            onFinish={handleSubmit}
             >
             <h3>  Register as a Photographer</h3>
-                <Form.Item label="Name" rules={rules}>
+                <Form.Item label="Name"  rules={rules} name="name">
                 <Input value={fullName} onChange={(e)=>setName(e.target.value)}/>
                 </Form.Item>
-                <Form.Item label="Age" rules={rules}>
+                <Form.Item label="Age" rules={rules} name="age">
                 <InputNumber min={16} max={80} value={age} onChange={(e)=>setAge(e)}/>
                 </Form.Item>
-                <Form.Item label="Email" rules={rules}>
+                <Form.Item label="Email" rules={rules} name="email">
                 <Input name="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 </Form.Item>
-                <Form.Item label="Phone Number" rules={rules}>
+                <Form.Item label="Phone Number" rules={rules} name="phone">
                 <Input value={phone} onChange={(e)=>setPhone(e.target.value)} name="phone"/>
                 </Form.Item>
-                <Form.Item label="Gender" rules={rules}>
+                <Form.Item label="Gender" rules={rules} name="gender">
                 <Radio.Group value={gender} onChange={(e)=>setGender(e.target.value)} name="gender">
                     <Radio value="male"> Male </Radio>
                     <Radio value="female"> Female </Radio>
                     <Radio value="others"> Others </Radio>
                 </Radio.Group>
                 </Form.Item>
-                <Form.Item label="Address" rules={rules}>
+                <Form.Item label="Address" rules={rules} name="address">
                 <Input value={address} onChange={(e)=>setAddress(e.target.value)} name="address"/>
                 </Form.Item>
-                <Form.Item label="Province" rules={rules}>
+                <Form.Item label="Province" rules={rules} name="province">
                 <Select value={province} onChange={(e)=>setProvince(e)}>
                     <Select.Option value="sudurpaschim">Sudurpaschim</Select.Option>
                     <Select.Option value="karnali">Karnali</Select.Option>
@@ -152,10 +163,10 @@ const RegisterPhotographer = () => {
                     <Select.Option value="both">Both</Select.Option>
                 </Select>
                 </Form.Item>
-                <Form.Item label="Charge" rules={rules}>
+                <Form.Item label="Charge" name="charge" rules={rules}>
                 <Input.Group compact>
                 <Form.Item
-                    name={['charge', 'amount']}
+                    name={["charge","amount"]}
                     noStyle
                     >
                 <InputNumber
@@ -169,7 +180,7 @@ const RegisterPhotographer = () => {
                     />
                 </Form.Item>
                     <Form.Item
-                    name={['charge', 'basis']}
+                    name={["charge","basis"]}
                     noStyle
                     >
                     <Select placeholder="Basis" value={basis} onChange={(e)=>setBasis(e)}>
@@ -195,7 +206,7 @@ const RegisterPhotographer = () => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 5 }}>
-                <Button block type="primary" htmlType="submit" onClick={handleSubmit}>
+                <Button block type="primary" htmlType="submit" loading={loading}>
                     Register
                 </Button>
                 </Form.Item>

@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const URL = "";
+const URL = "http://localhost:8000";
 
 export const registerPhotographer = async (data) => {
   try {
-    return await axios.post(`${URL}/add`, data);
+    return await axios.post(`${URL}/register`, data);
   } catch (error) {
-    throw error("Cant connect to the API");
+    throw Error("Cant connect to the API");
   }
 };
