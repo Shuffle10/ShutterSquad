@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import ErrorPage from './components/ErrorPage'
+import SearchResults from './components/SearchResults'
 
 function App() {
 
@@ -39,7 +40,8 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<RegisterPhotographer/>}/>
           <Route path='/profile/:id' element={<Profile/>}/>
-          <Route path='/search/:province' element={<Profile/>}/>
+          <Route path='/search' element={<SearchResults/>}/>
+          <Route path='/search/:province' element={<SearchResults/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <StyledFooter>

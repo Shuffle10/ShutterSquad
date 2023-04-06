@@ -59,7 +59,7 @@ const Navbar = () => {
       <div className="nav-items">
         <ul>
           <li className="navlist-items"> <InternalLink to='guide' smooth={true}>User Guide</InternalLink></li>
-          <li className="navlist-items"><Link to='/categories'>Categories</Link></li>
+          <li className="navlist-items"><InternalLink to='about-us' smooth={true}>About Us</InternalLink></li>
         <StyledButton><Button type="primary"><Link to='/register'>Register</Link></Button></StyledButton>
         <StyledButton><Button type="primary"><Link to='/login'>Login</Link></Button></StyledButton>
         </ul>

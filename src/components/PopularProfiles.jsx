@@ -1,14 +1,12 @@
 import styled from "styled-components";
 import { CameraOutlined, VideoCameraOutlined, DollarOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { Avatar,Card, Button } from 'antd';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 const { Meta } = Card;
+import ProfileCard from "./ProfileCard";
 
 
 
-const StyledCard = styled.div`
-    width: 400px;
-`
 const CardWrapper = styled.div`
     display: flex;
     justify-content: space-between;
@@ -23,6 +21,8 @@ const StyledButton = styled.div`
 
 
 const PopularProfiles = () => {
+
+    const navigate = useNavigate()
 
     const profiles = [
         {
@@ -64,6 +64,20 @@ const PopularProfiles = () => {
             avatar: `${import.meta.env.BASE_URL}/images/Profile/Avatar/3.jpeg`,
             location : "Damak, Jhapa"
 
+        },
+
+        {
+            id: 4,
+            name: "Arayn Raj",
+            province: "Sudurpaschim",
+            specialization: "Videography",
+            city: "Doti",
+            fees : 76000,
+            per: "day",
+            coverPhoto:`${import.meta.env.BASE_URL}/images/Profile/Cover/3.jpg`,
+            avatar: `${import.meta.env.BASE_URL}/images/Profile/Avatar/3.jpeg`,
+            location : "Doti, Doti"
+
         }
     ];
 
@@ -71,37 +85,11 @@ const PopularProfiles = () => {
     return ( 
     <>
             <CardWrapper>
-            {profiles.map((profile)=>(
-                <>
-                    <StyledCard>
-                    <Link to={`/profile/${profile.id}`}>
-                    <Card
-                        hoverable
-                        cover={
-                        <img
-                            alt="Cover Photo"
-                            src={profile.coverPhoto}
-                        />
-                        }
-
-                            actions={[
-                                <> <DollarOutlined/>{profile.fees}/{profile.per}</>,
-                                <>  <CameraOutlined style={{display: "inline"}}/>&nbsp;&nbsp;/&nbsp;&nbsp;<VideoCameraOutlined style={{display: "inline"}}/> <br/><span>{profile.specialization}</span></>,
-                                <> <EnvironmentOutlined/>{profile.province}</>,
-                                ]}
-                    >
-                        <Meta
-                        avatar={<Avatar src={profile.avatar} />}
-                        title={profile.name}
-                        description={profile.location}
-                        />
-                    </Card>
-                    </Link>
-                    </StyledCard>
-                </>
+            {profiles.slice(0,3).map((profile)=>(
+                <ProfileCard profile={profile}/>
             ))}
             </CardWrapper>
-            <StyledButton><Button type="primary" style={{display:"block", margin:"0px auto", marginTop:"50px"}}> View More </Button> </StyledButton>
+            <StyledButton><Button type="primary" style={{display:"block", margin:"0px auto", marginTop:"50px"}} onClick={()=> navigate('/search/')}> View More </Button> </StyledButton>
             </>                    
     );
 }

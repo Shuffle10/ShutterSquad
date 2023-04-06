@@ -33,7 +33,7 @@ const Home = () => {
             <PopularProfiles/>
         </StyledSection>
         <StyledSection>
-            <h3>Why ShutterSquad?</h3>
+            <h3 id="about-us">Why ShutterSquad?</h3>
             <WhyUs/>
         </StyledSection>
         <StyledSection  color={"#f7f7f7"}>

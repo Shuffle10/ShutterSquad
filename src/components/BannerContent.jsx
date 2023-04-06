@@ -1,4 +1,6 @@
 import { Form, Input } from "antd";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -38,14 +40,18 @@ const StyledBannerContent = styled.div`
 
 
 const BannerContent = () => {
+
+    const navigate=useNavigate()
+    const [search, setSearch] = useState('')
+
     return ( 
         <>
         <StyledBannerContent>
         <h2>Find Professional Photographers Near You!</h2>
         <p>Hire professionals at a price as low as Rs. 10,000</p>
-        <form action="/ShutterSquad/search">
-        <Input name="province" placeholder="Search with your province name" />
-        </form>
+        <Form onFinish={()=>navigate(`/search/${search}`)}>
+        <Input name="province" placeholder="Search with your province name" value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        </Form>
         </StyledBannerContent>
         </>
      );
