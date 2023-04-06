@@ -12,7 +12,7 @@ export const registerPhotographer = async (data) => {
 
 export const getPhotographers = async (data) => {
   try {
-    return await axios.get(`${URL}/get`, data);
+    return await axios.get(`${URL}/all`, data);
   } catch (error) {
     throw Error("Cant connect to the API");
   }

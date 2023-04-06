@@ -117,8 +117,6 @@ const RegisterPhotographer = () => {
     const [amount, setAmount] = useState('');
     const [basis, setBasis] = useState('');
     const [bio, setBio] = useState('');
-
-
     const [loading, setLoading] = useState(false)
     const [form] = Form.useForm();
 
@@ -132,7 +130,7 @@ const RegisterPhotographer = () => {
             onFinish={handleSubmit}
             >
             <h3>  Register as a Photographer</h3>
-                <Form.Item label="Name"  rules={rules} name="name">
+                <Form.Item label="Name"  rules={rules} name="fullName">
                 <Input value={fullName} onChange={(e)=>setName(e.target.value)}/>
                 </Form.Item>
                 <Form.Item label="Age" rules={rules} name="age">
@@ -146,9 +144,9 @@ const RegisterPhotographer = () => {
                 </Form.Item>
                 <Form.Item label="Gender" rules={rules} name="gender">
                 <Radio.Group value={gender} onChange={(e)=>setGender(e.target.value)} name="gender">
-                    <Radio value="male"> Male </Radio>
-                    <Radio value="female"> Female </Radio>
-                    <Radio value="others"> Others </Radio>
+                    <Radio value="Male"> Male </Radio>
+                    <Radio value="Female"> Female </Radio>
+                    <Radio value="Others"> Others </Radio>
                 </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Address" rules={rules} name="address">
@@ -156,21 +154,21 @@ const RegisterPhotographer = () => {
                 </Form.Item>
                 <Form.Item label="Province" rules={rules} name="province">
                 <Select value={province} onChange={(e)=>setProvince(e)}>
-                    <Select.Option value="sudurpaschim">Sudurpaschim</Select.Option>
-                    <Select.Option value="karnali">Karnali</Select.Option>
-                    <Select.Option value="lumbini">Lumbini</Select.Option>
-                    <Select.Option value="gandaki">Gandaki</Select.Option>
-                    <Select.Option value="bagmati">Bagmati</Select.Option>
-                    <Select.Option value="madhesh">Madhesh</Select.Option>
-                    <Select.Option value="koshi">Koshi</Select.Option>
+                    <Select.Option value="Sudurpaschim">Sudurpaschim</Select.Option>
+                    <Select.Option value="Karnali">Karnali</Select.Option>
+                    <Select.Option value="Lumbini">Lumbini</Select.Option>
+                    <Select.Option value="Gandaki">Gandaki</Select.Option>
+                    <Select.Option value="Bagmati">Bagmati</Select.Option>
+                    <Select.Option value="Madhesh">Madhesh</Select.Option>
+                    <Select.Option value="Koshi">Koshi</Select.Option>
 
                 </Select>
                 </Form.Item>
                 <Form.Item label="Specialization" rules={rules} name="specialization">
                 <Select value={specialization} onChange={(e)=>setSpecialization(e)}>
-                    <Select.Option value="photography">Photography</Select.Option>
-                    <Select.Option value="videography">Videography</Select.Option>
-                    <Select.Option value="both">Both</Select.Option>
+                    <Select.Option value="Photography">Photography</Select.Option>
+                    <Select.Option value="Videography">Videography</Select.Option>
+                    <Select.Option value="Both">Both</Select.Option>
                 </Select>
                 </Form.Item>
                 <Form.Item label="Charge" name="charge" rules={rules}>

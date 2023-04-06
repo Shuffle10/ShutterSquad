@@ -1,36 +1,21 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { getPhotographers } from "../services/clientAPI";
 
-const useFetch = (endpoint) => {
-  const URL = "http://localhost:8000/";
-  const [data, setData] = useState(null);
+const useFetch = () => {
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      axios
-        .get(URL + endpoint)
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("Could not fetch data!");
-          } else {
-            return res.json;
-          }
-        })
-        .then((data) => {
-          setData(data);
-          setLoading(false);
-          setError(null);
-        })
-        .catch((err) => {
-          setError(err.message);
-          setLoading(false);
-        });
-    }, 2000);
-  }, [endpoint]);
+    getAllPhotographers();
+  }, []);
 
-  return { data, loading, error };
+  const getAllPhotographers = async () => {
+    let response = await getPhotographers();
+    setData(response.data);
+    setLoading(false);
+  };
+
+  return { data, loading };
 };
 
 export default useFetch;
