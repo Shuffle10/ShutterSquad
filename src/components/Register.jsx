@@ -5,6 +5,10 @@ import bannerImage from "/images/Banner/banner.jpeg"
 import styled from "styled-components";
 import { useState, useHis } from "react";
 import { registerPhotographer } from "../services/clientAPI";
+import FormItem from "antd/es/form/FormItem";
+
+const {TextArea} = Input;
+
 
 
 
@@ -93,9 +97,13 @@ const RegisterPhotographer = () => {
         setLoading(true)
         console.log(loading)
         const user = {fullName, age, email, phone, gender, specialization, address, province, amount, basis}
-        await registerPhotographer(user);
-        setLoading(false)
-        navigate('/')
+        try{
+            await registerPhotographer(user);
+            navigate('/', {state:{message: "Congratulation! You are a member of the squad!"}})
+            setLoading(false)
+        }catch{
+            console.log("Cannot connect to the server!")
+        }
     }
 
     const [fullName, setName] = useState('');
@@ -108,6 +116,8 @@ const RegisterPhotographer = () => {
     const [specialization, setSpecialization] = useState('');
     const [amount, setAmount] = useState('');
     const [basis, setBasis] = useState('');
+    const [bio, setBio] = useState('');
+
 
     const [loading, setLoading] = useState(false)
     const [form] = Form.useForm();
@@ -190,6 +200,9 @@ const RegisterPhotographer = () => {
                 </Form.Item>
                 </Input.Group>
                 </Form.Item>
+                <FormItem label="Bio" name="bio">
+                <TextArea placeholder="100 characters or less" maxLength={100} value={bio} onChange={(e)=>setBio(e.target.value)}/>
+                </FormItem>
                 <Form.Item label="Upload" valuePropName="fileList">
                 <Upload action="/upload.do" listType="picture-card">
                     <div>
@@ -205,12 +218,12 @@ const RegisterPhotographer = () => {
                 </Upload>
                 </Form.Item>
 
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 5 }}>
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
                 <Button block type="primary" htmlType="submit" loading={loading}>
                     Register
                 </Button>
                 </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 5 }}>
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
                 <p style={{color: "white"}}> Already have an account? <Link to="/login"> <b> Log In </b></Link> Instead </p>
                 </Form.Item>
             </Form>
