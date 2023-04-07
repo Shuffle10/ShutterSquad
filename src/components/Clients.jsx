@@ -5,12 +5,13 @@ const StyledRow = styled.div`
    .client-row{
       display: flex;
       justify-content: center;
+      flex-wrap:wrap;
       align-items: center;
-      gap: 50px;
+      gap: 3vw;
    }
 
    img{
-      height: 100px;
+      height: 7vw;
    }
 `
 

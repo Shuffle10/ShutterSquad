@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 import styled from "styled-components";
 
 const StyledForm = styled.div`
-        background: whitesmoke;
+        background-color: #cfcfcf;
         min-height: 100vh;
         display: flex;
         justify-content: center;

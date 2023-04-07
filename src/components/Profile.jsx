@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import PhotographerInfo from "./PhotographerInfo";
-import useFetch from "../hooks/useFetch";
+import { useEffect } from "react";
 
 
 
@@ -17,11 +17,12 @@ const CoverWrapper = styled.div`
 
 
 
-const Profile = () => {
+const Profile = ({profiles}) => {
     
     const {_id} = useParams()
-
-    const {data: profiles, loading} = useFetch();    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
     return ( 
         <>

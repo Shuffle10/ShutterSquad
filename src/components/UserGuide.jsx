@@ -1,6 +1,5 @@
 import { SearchOutlined, EyeOutlined, CheckCircleOutlined, PhoneOutlined, CalendarOutlined } from "@ant-design/icons";
 import { Steps } from "antd";
-import { useState } from "react";
 import styled from "styled-components";
 
 
@@ -8,6 +7,14 @@ import styled from "styled-components";
 
 
 const StyledSteps = styled.div`
+    display: flex;
+    justify-content: center;
+
+    .ant-steps{
+      width: 70%;
+      margin: auto;
+    }
+
     .ant-steps-item-title{
         font-size: 22px;
     }
@@ -15,6 +22,7 @@ const StyledSteps = styled.div`
     .ant-steps-item-description{
         font-size: 18px;
     }
+
 `
 
 const UserGuide = () => {

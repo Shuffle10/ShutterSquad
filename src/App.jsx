@@ -11,19 +11,29 @@ import Login from './components/Login'
 import Profile from './components/Profile'
 import ErrorPage from './components/ErrorPage'
 import SearchResults from './components/SearchResults'
+import useFetch from './hooks/useFetch'
+
+
+
+
+const StyledFooter = styled.div`
+.ant-layout-footer{
+  text-align:center;
+  background-color: rgb(213 210 207);
+  font-size: 18px;
+}
+`
 
 function App() {
 
-  const StyledFooter = styled.div`
-    .ant-layout-footer{
-      text-align:center;
-      background-color: rgb(213 210 207);
-      font-size: 18px;
-    }
-  `
+
+
+
+  const {data: profiles, loading} = useFetch();
+
+  
 
   return (
-
     <BrowserRouter basename="/ShutterSquad">
     <Globalstyle/>
       <ConfigProvider
@@ -36,12 +46,12 @@ function App() {
       <div className="App">
       <Navbar/>
         <Routes>
-          <Route exact path='/' element={<Home/>}/>
+          <Route exact path='/' element={<Home  profiles={profiles} loading={loading}/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<RegisterPhotographer/>}/>
-          <Route path='/profile/:_id' element={<Profile/>}/>
-          <Route path='/search' element={<SearchResults/>}/>
-          <Route path='/search/:province' element={<SearchResults/>}/>
+          <Route path='/profile/:_id' element={<Profile profiles={profiles} loading={loading}/>}/>
+          <Route path='/search' element={<SearchResults profiles={profiles} loading={loading}/>}/>
+          <Route path='/search/:province' element={<SearchResults profiles={profiles} loading={loading}/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
         <StyledFooter>

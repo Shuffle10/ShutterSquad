@@ -21,11 +21,11 @@ const PageWrapper = styled.div`
     background-color: #cfcfcf;
 `
 
-const SearchResults = () => {
+const SearchResults = ({profiles}) => {
     const {province} = useParams()
     const [search, setSearch] = useState(province)
 
-    const {data: profiles, loading} = useFetch();    
+
 
 
     return ( <>
@@ -35,7 +35,7 @@ const SearchResults = () => {
     <CardWrapper>
     {province==undefined?<>{profiles.map((profile)=>(
                 <ProfileCard profile={profile}/>
-    ))}</>:<>{(profiles.filter((profile)=>(profile.province).includes(Capitalize(search))||(profile.address).includes(Capitalize(search)))).map((profile)=>(
+    ))}</>:<>{(profiles.filter((profile)=>(profile.province.toLowerCase()).includes((search.toLowerCase()))||(profile.address.toLowerCase()).includes(search.toLowerCase()))).map((profile)=>(
                 <ProfileCard profile={profile}/>
     ))}</>}
     

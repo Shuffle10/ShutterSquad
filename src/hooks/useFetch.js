@@ -6,7 +6,9 @@ const useFetch = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllPhotographers();
+    setTimeout(() => {
+      getAllPhotographers();
+    }, 1000);
   }, []);
 
   const getAllPhotographers = async () => {

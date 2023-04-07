@@ -9,17 +9,18 @@ import {StyledSection} from "./StyledSection";
 import { useLocation } from "react-router-dom";
 import FlashMessage from "./FlashMessage";
 import { useEffect } from "react";
+import useFetch from "../hooks/useFetch";
 
 
-
-
-const Home = () => {
+const Home = ({profiles, loading}) => {
     useEffect(() => {
-        const timeId = setTimeout(() => {
-            {window.history.replaceState({}, document.title)}
-        }, 3000)
+        window.history.replaceState({}, document.title)
     }, []);
+
+
+
     const location = useLocation()
+
 
     return ( 
         <>
@@ -30,7 +31,7 @@ const Home = () => {
             <UserGuide/>
         </StyledSection>
         <StyledSection color={"#f7f7f7"}> 
-            <PopularProfiles/>
+            <PopularProfiles profiles={profiles} loading={loading}/>
         </StyledSection>
         <StyledSection>
             <h3 id="about-us">Why ShutterSquad?</h3>

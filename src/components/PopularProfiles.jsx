@@ -1,15 +1,18 @@
 import styled from "styled-components";
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import {useNavigate} from 'react-router-dom'
 import ProfileCard from "./ProfileCard";
-import useFetch from "../hooks/useFetch";
+
 
 
 
 
 const CardWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 75px;
 `
 const StyledButton = styled.div`
   .ant-btn{
@@ -20,19 +23,18 @@ const StyledButton = styled.div`
 `
 
 
-const PopularProfiles = () => {
-    
+const PopularProfiles = ({profiles, loading}) => {
+
     const navigate = useNavigate()
-     const {data: profiles, loading} = useFetch();
-
-
 
     return ( 
     <>
             <CardWrapper>
-            {profiles.slice(0,3).map((profile)=>(
-                <ProfileCard profile={profile}/>
-            ))}
+            {loading==true?<><Spin size="large"><div className="content" /></Spin></>:<>
+            {profiles.slice(profiles.length-3,profiles.length).map((profile)=>(
+                <ProfileCard profile={profile} loading={loading}/>
+            ))}         
+            </>}
             </CardWrapper>
             <StyledButton><Button type="primary" style={{display:"block", margin:"0px auto", marginTop:"50px"}} onClick={()=> navigate('/search/')}> View More </Button> </StyledButton>
             </>                    

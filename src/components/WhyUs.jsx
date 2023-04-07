@@ -7,11 +7,12 @@ import {HeartOutlined,DollarOutlined,LikeOutlined,CarryOutOutlined,CameraOutline
 const StepsWrapper = styled.div`
     display: flex;
     justify-content: center;
-    gap: 200px;
+    gap: 100px;
+    flex-wrap: wrap;
 `
 
 const StyledSteps = styled.div`
-    width: 900px;
+    width: 600px;
 
     .ant-steps{
         align-items: space-between;

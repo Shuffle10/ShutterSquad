@@ -8,7 +8,7 @@ const StyledCard = styled.div`
     width: 400px;
 `
 
-const ProfileCard = ({profile}) => {
+const ProfileCard = ({profile, loading}) => {
     return ( <>
                     <StyledCard>
                     <Link to={`/profile/${profile._id}`}>

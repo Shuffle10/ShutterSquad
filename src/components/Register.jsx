@@ -3,13 +3,20 @@ import { PlusOutlined,  } from '@ant-design/icons';
 import { Link, useNavigate} from "react-router-dom";
 import bannerImage from "/images/Banner/banner.jpeg"
 import styled from "styled-components";
-import { useState, useHis } from "react";
+import { useState } from "react";
 import { registerPhotographer } from "../services/clientAPI";
 import FormItem from "antd/es/form/FormItem";
+import axios from "axios";
+
+
 
 const {TextArea} = Input;
 
-
+// cloudinary.config({
+//     cloud_name: 'dja7lj7ax',
+//     api_key: '383595916779917',
+//     api_secret: '9o9XQ8EJM4GIWlpRB6UK5v85QyY'
+// });
 
 
 const layout = {
@@ -26,19 +33,19 @@ const FormWrapper = styled.div`
 `
 
 const StyledForm = styled.div`
-    background-color: rgba(0,0,0,0.6);
-    padding: 50px;
-    
+    background-color: rgba(0,0,0,0.6); 
     display: flex;
+    padding: 100px;
+    justify-content: center;
 
     h3{
         font-size: 32px;
     }
 
     .ant-form{
-        width: 40%;
+        width: 700px;
         background: rgba(0,0,0,0.3);
-        margin: 60px auto;
+        // margin: 60px auto;
         padding: 40px;
         border-radius: 20px;
         border: 1px solid rgba(0,0,0,0.2);
@@ -55,15 +62,15 @@ const StyledForm = styled.div`
             color: white;
         }
 
-        input, .ant-input-number, .ant-select-selector, .ant-select{
-            background: transparent;
-            color: white;
+        // input, .ant-input-number, .ant-select-selector, .ant-select, #password{
+        //     background: transparent;
+        //     color: white;
 
 
-            &::placeholder{
-                color: rgba(255,255,255,0.5);
-            }
-        }
+        //     &::placeholder{
+        //         color: rgba(255,255,255,0.5);
+        //     }
+        // }
 
         .ant-form-item-control-input-content{
             display: flex;
@@ -75,14 +82,6 @@ const RegisterPhotographer = () => {
 
     const navigate = useNavigate()
 
-    const defaultValue = {
-        name: "",
-        email: "",
-        number: "",
-        address: "",
-        gender: "",
-    }
-
     const rules = [
         {
         required: true,
@@ -93,22 +92,55 @@ const RegisterPhotographer = () => {
 
     const handleSubmit = async ()=>{
         form.validateFields();
-        console.log("Submit")
         setLoading(true)
-        console.log(loading)
-        const user = {fullName, age, email, phone, gender, specialization, address, province, amount, basis}
-        try{
-            await registerPhotographer(user);
-            navigate('/', {state:{message: "Congratulation! You are a member of the squad!"}})
-            setLoading(false)
-        }catch{
-            console.log("Cannot connect to the server!")
-        }
+        const user = {fullName, age, email, phone, gender, specialization, address, province, amount, basis, avatar, coverPhoto}
+        console.log(user)
+        // try{
+        //     await registerPhotographer(user);
+        //     navigate('/', {state:{message: "Congratulation! You are a member of the squad!"}})
+        //     setLoading(false)
+        // }catch{
+        //     console.log("Cannot connect to the server!")
+        // }
     }
 
+    const uploadAvatar = async (file) => {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', 'ss_images');
+        
+            try {
+              const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', formData);
+              setAvatar(response.data.url);
+            } catch (error) {
+              console.error(error);
+              message.error('Upload failed. Please try again later.');
+            }
+      };
+
+    
+
+    const uploadCover = async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'ss_images');
+    
+        try {
+          const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', formData);
+          setCoverPhoto(response.data.url);
+
+        } catch (error) {
+          console.error(error);
+          message.error('Upload failed. Please try again later.');
+        }
+
+    }
+
+
     const [fullName, setName] = useState('');
-    const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [age, setAge] = useState('');
     const [phone, setPhone] = useState('');
     const [gender, setGender] = useState('');
     const [address, setAddress] = useState('');
@@ -117,7 +149,10 @@ const RegisterPhotographer = () => {
     const [amount, setAmount] = useState('');
     const [basis, setBasis] = useState('');
     const [bio, setBio] = useState('');
+    const [avatar, setAvatar] = useState('')
+    const [coverPhoto, setCoverPhoto] = useState('')
     const [loading, setLoading] = useState(false)
+
     const [form] = Form.useForm();
 
 
@@ -133,11 +168,14 @@ const RegisterPhotographer = () => {
                 <Form.Item label="Name"  rules={rules} name="fullName">
                 <Input value={fullName} onChange={(e)=>setName(e.target.value)}/>
                 </Form.Item>
-                <Form.Item label="Age" rules={rules} name="age">
-                <InputNumber min={16} max={80} value={age} onChange={(e)=>setAge(e)}/>
-                </Form.Item>
                 <Form.Item label="Email" rules={rules} name="email">
                 <Input name="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                </Form.Item>
+                <Form.Item label="Password" rules={rules} name="password">
+                <Input.Password name="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                </Form.Item>
+                <Form.Item label="Age" rules={rules} name="age">
+                <InputNumber min={16} max={80} value={age} onChange={(e)=>setAge(e)}/>
                 </Form.Item>
                 <Form.Item label="Phone Number" rules={rules} name="phone">
                 <Input value={phone} onChange={(e)=>setPhone(e.target.value)} name="phone"/>
@@ -202,13 +240,13 @@ const RegisterPhotographer = () => {
                 <TextArea placeholder="100 characters or less" maxLength={100} value={bio} onChange={(e)=>setBio(e.target.value)}/>
                 </FormItem>
                 <Form.Item label="Upload" valuePropName="fileList">
-                <Upload action="/upload.do" listType="picture-card">
+                <Upload action="/" beforeUpload={uploadAvatar}  accept="image/png, image/jpeg" listType="picture-card" maxCount={1} >
                     <div>
                     <PlusOutlined style={{color: "white"}} />
                     <div style={{marginTop: 8, color: "white"}}>Profile Photo</div>
                     </div>
                 </Upload>
-                <Upload action="/upload.do" listType="picture-card">
+                <Upload action="/" beforeUpload={uploadCover}   accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
                     <div>
                     <PlusOutlined style={{color: "white"}}/>
                     <div style={{ marginTop: 8, color: "white"}}>Cover Photo</div>
