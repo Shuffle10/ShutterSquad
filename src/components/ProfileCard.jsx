@@ -5,7 +5,20 @@ import {Link} from 'react-router-dom'
 const { Meta } = Card;
 
 const StyledCard = styled.div`
-    width: 400px;
+
+    .ant-card{
+        width: 400px;
+        height: 450px;
+    }
+
+    .ant-card-cover{
+        width: 400px;
+        height: 250px;
+        img{
+            height: 100%;
+            object-fit: cover;
+        }
+    }
 `
 
 const ProfileCard = ({profile, loading}) => {
@@ -17,7 +30,7 @@ const ProfileCard = ({profile, loading}) => {
                         cover={
                         <img
                             alt="Cover Photo"
-                            src={`${import.meta.env.BASE_URL}/images/Profile/Cover/1.jpg`}
+                            src={profile.coverPhoto}
                         />
                         }
 
@@ -28,7 +41,7 @@ const ProfileCard = ({profile, loading}) => {
                                 ]}
                     >
                         <Meta
-                        avatar={<Avatar src={`${import.meta.env.BASE_URL}/images/Profile/Avatar/1.jpg`}/>}
+                        avatar={<Avatar src={profile.avatar} size={60}/>}
                         title={profile.fullName}
                         description={profile.address}
                         />

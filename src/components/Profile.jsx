@@ -29,7 +29,7 @@ const Profile = ({profiles}) => {
             {(profiles.filter((e)=>e._id==_id)).map((profile)=>(
                 <>
                 <CoverWrapper>
-                <img src={`${import.meta.env.BASE_URL}/images/Profile/Cover/1.jpg`}/>
+                <img src={profile.coverPhoto}/>
                 </CoverWrapper>
                 
                         <PhotographerInfo profile={profile}/>

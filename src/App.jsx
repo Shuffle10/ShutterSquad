@@ -46,7 +46,7 @@ function App() {
       <div className="App">
       <Navbar/>
         <Routes>
-          <Route exact path='/' element={<Home  profiles={profiles} loading={loading}/>}/>
+          <Route exact path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<RegisterPhotographer/>}/>
           <Route path='/profile/:_id' element={<Profile profiles={profiles} loading={loading}/>}/>

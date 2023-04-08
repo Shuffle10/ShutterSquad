@@ -7,16 +7,17 @@ import { useState } from "react";
 import { registerPhotographer } from "../services/clientAPI";
 import FormItem from "antd/es/form/FormItem";
 import axios from "axios";
+// import cloudinary from "cloudinary/lib/cloudinary"
 
+
+// cloudinary.config({
+//     cloud_name: process.env.REACT_APP_CLOUD_NAME,
+//     api_key: process.env.REACT_APP_API_KEY,
+//     api_secret: process.env.REACT_APP_API_SECRET
+// });
 
 
 const {TextArea} = Input;
-
-// cloudinary.config({
-//     cloud_name: 'dja7lj7ax',
-//     api_key: '383595916779917',
-//     api_secret: '9o9XQ8EJM4GIWlpRB6UK5v85QyY'
-// });
 
 
 const layout = {
@@ -62,15 +63,6 @@ const StyledForm = styled.div`
             color: white;
         }
 
-        // input, .ant-input-number, .ant-select-selector, .ant-select, #password{
-        //     background: transparent;
-        //     color: white;
-
-
-        //     &::placeholder{
-        //         color: rgba(255,255,255,0.5);
-        //     }
-        // }
 
         .ant-form-item-control-input-content{
             display: flex;
@@ -90,31 +82,34 @@ const RegisterPhotographer = () => {
     ]
 
 
+
     const handleSubmit = async ()=>{
         form.validateFields();
         setLoading(true)
-        const user = {fullName, age, email, phone, gender, specialization, address, province, amount, basis, avatar, coverPhoto}
+        const user = {fullName, age, email, password, phone, gender, specialization, address, province, amount, basis, bio, avatar, coverPhoto}
         console.log(user)
-        // try{
-        //     await registerPhotographer(user);
-        //     navigate('/', {state:{message: "Congratulation! You are a member of the squad!"}})
-        //     setLoading(false)
-        // }catch{
-        //     console.log("Cannot connect to the server!")
-        // }
+        try{
+            await registerPhotographer(user);
+            navigate('/', {state:{message: "Congratulation! You are a member of the squad!"}})
+            setLoading(false)
+        }catch{
+            console.log("Cannot connect to the server!")
+        }
     }
 
     const uploadAvatar = async (file) => {
             const formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', 'ss_images');
-        
+            setLoading(true) 
             try {
               const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', formData);
               setAvatar(response.data.url);
+              setLoading(false)
             } catch (error) {
               console.error(error);
               message.error('Upload failed. Please try again later.');
+              setLoading(false)
             }
       };
 
@@ -124,16 +119,35 @@ const RegisterPhotographer = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', 'ss_images');
-    
+        setLoading(true) 
+        
         try {
           const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', formData);
           setCoverPhoto(response.data.url);
-
+          setLoading(false) 
         } catch (error) {
           console.error(error);
           message.error('Upload failed. Please try again later.');
+          setLoading(false) 
         }
+    }
 
+    const removeAvatar = async () => {
+    // const imageURL = avatar;
+    // const publicId = "haha";
+    //   cloudinary.v2.uploader.destroy(publicId, function(error,result) {
+    //     console.log(result, error) })
+    //     .then(resp => console.log(resp))
+    //     .catch(_err=> console.log("Something went wrong, please try again later."));
+    }
+
+    const removeCover = async () => {
+    //     const imageURL = avatar;
+    //     const publicId = cloudinary.utils.publicId(imageURL);
+    //   cloudinary.v2.uploader.destroy(imageURL, function(error,result) {
+    //     console.log(result, error) })
+    //     .then(resp => console.log(resp))
+    //     .catch(_err=> console.log("Something went wrong, please try again later."));
     }
 
 
@@ -152,7 +166,6 @@ const RegisterPhotographer = () => {
     const [avatar, setAvatar] = useState('')
     const [coverPhoto, setCoverPhoto] = useState('')
     const [loading, setLoading] = useState(false)
-
     const [form] = Form.useForm();
 
 
@@ -237,16 +250,16 @@ const RegisterPhotographer = () => {
                 </Input.Group>
                 </Form.Item>
                 <FormItem label="Bio" name="bio">
-                <TextArea placeholder="100 characters or less" maxLength={100} value={bio} onChange={(e)=>setBio(e.target.value)}/>
+                <TextArea placeholder="300 characters or less" maxLength={300} value={bio} onChange={(e)=>setBio(e.target.value)}/>
                 </FormItem>
                 <Form.Item label="Upload" valuePropName="fileList">
-                <Upload action="/" beforeUpload={uploadAvatar}  accept="image/png, image/jpeg" listType="picture-card" maxCount={1} >
+                <Upload action="/" beforeUpload={uploadAvatar} onRemove={removeAvatar} accept="image/png, image/jpeg" listType="picture-card" maxCount={1} >
                     <div>
                     <PlusOutlined style={{color: "white"}} />
                     <div style={{marginTop: 8, color: "white"}}>Profile Photo</div>
                     </div>
                 </Upload>
-                <Upload action="/" beforeUpload={uploadCover}   accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
+                <Upload action="/" beforeUpload={uploadCover} onRemove={removeCover} accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
                     <div>
                     <PlusOutlined style={{color: "white"}}/>
                     <div style={{ marginTop: 8, color: "white"}}>Cover Photo</div>

@@ -17,6 +17,3 @@ export const getPhotographers = async (data) => {
     console.log("Cant connect to the API");
   }
 };
-
-
-

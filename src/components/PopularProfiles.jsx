@@ -31,9 +31,11 @@ const PopularProfiles = ({profiles, loading}) => {
     <>
             <CardWrapper>
             {loading==true?<><Spin size="large"><div className="content" /></Spin></>:<>
-            {profiles.slice(profiles.length-3,profiles.length).map((profile)=>(
-                <ProfileCard profile={profile} loading={loading}/>
-            ))}         
+            {profiles.length>3?<>{profiles.slice(profiles.length-3,profiles.length).map((profile)=>(
+                <ProfileCard profile={profile} loading={loading} key={profile._id}/>
+            ))}</>:<>{profiles.map((profile)=>(
+              <ProfileCard profile={profile} loading={loading} key={profile._id}/>
+          ))}</>}   
             </>}
             </CardWrapper>
             <StyledButton><Button type="primary" style={{display:"block", margin:"0px auto", marginTop:"50px"}} onClick={()=> navigate('/search/')}> View More </Button> </StyledButton>

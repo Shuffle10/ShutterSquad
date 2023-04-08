@@ -12,11 +12,12 @@ import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 
 
-const Home = ({profiles, loading}) => {
+const Home = () => {
     useEffect(() => {
         window.history.replaceState({}, document.title)
     }, []);
-
+    
+    const {data: profiles, loading} = useFetch();
 
 
     const location = useLocation()
