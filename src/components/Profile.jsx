@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PhotographerInfo from "./PhotographerInfo";
 import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
+import { Spin } from "antd";
 
 
 
@@ -16,6 +17,9 @@ const CoverWrapper = styled.div`
     }
 `
 
+const PageWrapper = styled.div`
+min-height: 100vh;
+`
 
 
 const Profile = () => {
@@ -30,7 +34,8 @@ const Profile = () => {
 
 
     return ( 
-        <>
+        <PageWrapper>
+
             {(profiles.filter((e)=>e._id==_id)).map((profile)=>(
                 <>
                 <CoverWrapper>
@@ -41,8 +46,10 @@ const Profile = () => {
                 
                 </>
             ))}
-        </>
+
+        </PageWrapper>
      );
 }
+
  
 export default Profile;

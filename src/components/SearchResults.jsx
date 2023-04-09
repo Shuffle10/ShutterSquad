@@ -21,6 +21,10 @@ const PageWrapper = styled.div`
     background-color: #cfcfcf;
 `
 
+const SpinWrapper = styled.div`
+    text-align: center;
+`
+
 const SearchResults = () => {
     const {province} = useParams()
     const [search, setSearch] = useState(province)
@@ -36,7 +40,7 @@ const SearchResults = () => {
     
     <StyledSection>          
     <SearchBar search={search} setSearch={setSearch}/>
-    {loading==true?<><Spin size="large"  style={{justifySelf:"center"}}></Spin></>:<>
+    {loading==true?<><SpinWrapper><Spin size="large"></Spin></SpinWrapper></>:<>
     <CardWrapper>
     {province==undefined?<>{profiles.map((profile)=>(
                 <ProfileCard profile={profile}  key={profile._id}/>
