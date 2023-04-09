@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import RegisterPhotographer from './components/Register'
@@ -16,6 +16,8 @@ import useFetch from './hooks/useFetch'
 
 
 
+
+
 const StyledFooter = styled.div`
 .ant-layout-footer{
   text-align:center;
@@ -28,8 +30,9 @@ function App() {
 
 
 
-
   const {data: profiles, loading} = useFetch();
+
+
 
   
 

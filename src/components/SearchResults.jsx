@@ -5,7 +5,7 @@ import { StyledSection } from "./StyledSection";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
-import Capitalize from "../services/capitalize";
+import { Spin } from "antd";
 
 
 
@@ -21,25 +21,31 @@ const PageWrapper = styled.div`
     background-color: #cfcfcf;
 `
 
-const SearchResults = ({profiles}) => {
+const SearchResults = () => {
     const {province} = useParams()
     const [search, setSearch] = useState(province)
+    
+    const {data: profiles, loading} = useFetch();
+
 
 
 
 
     return ( <>
     <PageWrapper>
-    <StyledSection>
+    
+    <StyledSection>          
     <SearchBar search={search} setSearch={setSearch}/>
+    {loading==true?<><Spin size="large"  style={{justifySelf:"center"}}></Spin></>:<>
     <CardWrapper>
     {province==undefined?<>{profiles.map((profile)=>(
-                <ProfileCard profile={profile}/>
+                <ProfileCard profile={profile}  key={profile._id}/>
     ))}</>:<>{(profiles.filter((profile)=>(profile.province.toLowerCase()).includes((search.toLowerCase()))||(profile.address.toLowerCase()).includes(search.toLowerCase()))).map((profile)=>(
                 <ProfileCard profile={profile}/>
-    ))}</>}
-    
+    ))}</>} 
     </CardWrapper>
+    </>}
+    
     </StyledSection>
     </PageWrapper>
     </> );

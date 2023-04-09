@@ -7,15 +7,6 @@ import { useState } from "react";
 import { registerPhotographer } from "../services/clientAPI";
 import FormItem from "antd/es/form/FormItem";
 import axios from "axios";
-// import cloudinary from "cloudinary/lib/cloudinary"
-
-
-// cloudinary.config({
-//     cloud_name: process.env.REACT_APP_CLOUD_NAME,
-//     api_key: process.env.REACT_APP_API_KEY,
-//     api_secret: process.env.REACT_APP_API_SECRET
-// });
-
 
 const {TextArea} = Input;
 
@@ -24,8 +15,6 @@ const layout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 14 },
   };
-
-
 
 const FormWrapper = styled.div`
     background-image: url(${bannerImage});
@@ -86,8 +75,11 @@ const RegisterPhotographer = () => {
     const handleSubmit = async ()=>{
         form.validateFields();
         setLoading(true)
+
+        const avatar = await uploadAvatar()
+        const coverPhoto = await uploadCover()
+
         const user = {fullName, age, email, password, phone, gender, specialization, address, province, amount, basis, bio, avatar, coverPhoto}
-        console.log(user)
         try{
             await registerPhotographer(user);
             navigate('/', {state:{message: "Congratulation! You are a member of the squad!"}})
@@ -97,58 +89,41 @@ const RegisterPhotographer = () => {
         }
     }
 
-    const uploadAvatar = async (file) => {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', 'ss_images');
-            setLoading(true) 
-            try {
-              const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', formData);
-              setAvatar(response.data.url);
-              setLoading(false)
-            } catch (error) {
-              console.error(error);
-              message.error('Upload failed. Please try again later.');
-              setLoading(false)
-            }
-      };
-
-    
-
-    const uploadCover = async (file) => {
+    const updateAvatar = (file) => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', 'ss_images');
-        setLoading(true) 
-        
+        setAvatarData(formData)
+    }
+
+    const updateCover = (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'ss_images');
+        setCoverData(formData)
+    }
+
+    const uploadAvatar = async () => {
+            try {
+            const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', avatarData);
+            return response.data.url
+            ;
+            } catch (error) {
+              console.error(error);
+            }
+      };
+
+    const uploadCover = async () => {
         try {
-          const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', formData);
-          setCoverPhoto(response.data.url);
-          setLoading(false) 
+          const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', coverData);
+          return response.data.url;
         } catch (error) {
           console.error(error);
-          message.error('Upload failed. Please try again later.');
-          setLoading(false) 
         }
     }
 
-    const removeAvatar = async () => {
-    // const imageURL = avatar;
-    // const publicId = "haha";
-    //   cloudinary.v2.uploader.destroy(publicId, function(error,result) {
-    //     console.log(result, error) })
-    //     .then(resp => console.log(resp))
-    //     .catch(_err=> console.log("Something went wrong, please try again later."));
-    }
 
-    const removeCover = async () => {
-    //     const imageURL = avatar;
-    //     const publicId = cloudinary.utils.publicId(imageURL);
-    //   cloudinary.v2.uploader.destroy(imageURL, function(error,result) {
-    //     console.log(result, error) })
-    //     .then(resp => console.log(resp))
-    //     .catch(_err=> console.log("Something went wrong, please try again later."));
-    }
+
 
 
     const [fullName, setName] = useState('');
@@ -163,8 +138,8 @@ const RegisterPhotographer = () => {
     const [amount, setAmount] = useState('');
     const [basis, setBasis] = useState('');
     const [bio, setBio] = useState('');
-    const [avatar, setAvatar] = useState('')
-    const [coverPhoto, setCoverPhoto] = useState('')
+    const[avatarData,setAvatarData] = useState();
+    const[coverData,setCoverData] = useState();
     const [loading, setLoading] = useState(false)
     const [form] = Form.useForm();
 
@@ -249,17 +224,17 @@ const RegisterPhotographer = () => {
                 </Form.Item>
                 </Input.Group>
                 </Form.Item>
-                <FormItem label="Bio" name="bio">
+                <FormItem label="Bio" name="bio" rules={rules}>
                 <TextArea placeholder="300 characters or less" maxLength={300} value={bio} onChange={(e)=>setBio(e.target.value)}/>
                 </FormItem>
-                <Form.Item label="Upload" valuePropName="fileList">
-                <Upload action="/" beforeUpload={uploadAvatar} onRemove={removeAvatar} accept="image/png, image/jpeg" listType="picture-card" maxCount={1} >
+                <Form.Item label="Upload" valuePropName="fileList" rules={rules}>
+                <Upload action="/" beforeUpload={updateAvatar}  accept="image/png, image/jpeg" listType="picture-card" maxCount={1} >
                     <div>
                     <PlusOutlined style={{color: "white"}} />
                     <div style={{marginTop: 8, color: "white"}}>Profile Photo</div>
                     </div>
                 </Upload>
-                <Upload action="/" beforeUpload={uploadCover} onRemove={removeCover} accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
+                <Upload action="/" beforeUpload={updateCover} accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
                     <div>
                     <PlusOutlined style={{color: "white"}}/>
                     <div style={{ marginTop: 8, color: "white"}}>Cover Photo</div>
