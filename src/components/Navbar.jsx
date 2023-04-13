@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom"
 import * as Scroll from 'react-scroll';
 import { HashLink as InternalLink } from 'react-router-hash-link';
+import { logoutUser } from "../services/clientAPI";
 
 const NavWrapper = styled.div`
   position: absolute;
@@ -50,6 +51,12 @@ const StyledButton = styled.div`
 
 const Navbar = () => {
 
+const {logout} = logoutUser()
+
+const handleLogout = () => {
+  logout()
+}
+
 const navigate = useNavigate()
 
   return ( 
@@ -62,6 +69,7 @@ const navigate = useNavigate()
         <ul>
           <li className="navlist-items"> <InternalLink to='/#user-guide' smooth={true}>User Guide</InternalLink></li>
           <li className="navlist-items"><InternalLink to='/#about-us' smooth={true}>About Us</InternalLink></li>
+        <StyledButton><Button type="primary" onClick={handleLogout}>Logout</Button></StyledButton>
         <StyledButton><Button type="primary"><Link to='/register'>Register</Link></Button></StyledButton>
         <StyledButton><Button type="primary"><Link to='/login'>Login</Link></Button></StyledButton>
         </ul>

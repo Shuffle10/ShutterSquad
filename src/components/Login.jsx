@@ -1,8 +1,10 @@
-import { Form, Input, Button} from "antd";
+import { Form, Input, Button, Alert} from "antd";
 import { MailOutlined, KeyOutlined } from "@ant-design/icons";
 import { Link} from "react-router-dom";
 import styled from "styled-components";
 import { loginPhotographer } from "../services/clientAPI";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const StyledForm = styled.div`
         background-color: #cfcfcf;
@@ -48,19 +50,24 @@ const layout = {
 
 const Login = () => {
 
+    const navigate = useNavigate()
+    const {login, error} = loginPhotographer()
+
     const handleLogin = async () => {
+        setLoading(true)
         const user = {email, password}
         try{
-            await loginPhotographer(user);
-            navigate('/')
+            await login(user);
             setLoading(false)
-        }catch{
+        }catch(err){
             console.log("Cannot connect to the server!")
         }
     }
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false)
+
 
 
     return ( 
@@ -69,6 +76,7 @@ const Login = () => {
             // {...layout}
             >
             <h3>  Log In as a Photographer</h3>
+                {error && <Alert message={error} type="error" style={{marginBottom:"20px"}} />}
                 <Form.Item  rules={[{ required: true}]}>
                 <Input prefix={<MailOutlined/>} value={email} onChange={e=>setEmail(e.target.value)}/>
                 </Form.Item>
@@ -76,7 +84,7 @@ const Login = () => {
                 <Input.Password prefix={<KeyOutlined/>} value={password} onChange={e=>setPassword(e.target.value)}/>
                 </Form.Item>
                 <Form.Item>
-                <Button block type="primary" htmlType="submit" onClick={handleLogin}>
+                <Button block type="primary" htmlType="submit" onClick={handleLogin} loading={loading}>
                     Log In
                 </Button>
                 </Form.Item>

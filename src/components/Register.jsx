@@ -1,6 +1,6 @@
-import { Form, Input, InputNumber, Radio, Select, Upload, Button} from "antd";
+import { Form, Input, InputNumber, Radio, Select, Upload, Button, message} from "antd";
 import { PlusOutlined,  } from '@ant-design/icons';
-import { Link, useNavigate} from "react-router-dom";
+import { Link} from "react-router-dom";
 import bannerImage from "/images/Banner/banner.jpeg"
 import styled from "styled-components";
 import { useState } from "react";
@@ -59,9 +59,28 @@ const StyledForm = styled.div`
 
     }
 `
+
+
 const RegisterPhotographer = () => {
 
-    const navigate = useNavigate()
+    const [fullName, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [age, setAge] = useState('');
+    const [phone, setPhone] = useState('');
+    const [gender, setGender] = useState('');
+    const [address, setAddress] = useState('');
+    const [province, setProvince] = useState('');
+    const [specialization, setSpecialization] = useState('');
+    const [amount, setAmount] = useState('');
+    const [basis, setBasis] = useState('');
+    const [bio, setBio] = useState('');
+    const[avatarData,setAvatarData] = useState();
+    const[coverData,setCoverData] = useState();
+    const [loading, setLoading] = useState(false);
+    const [form] = Form.useForm();
+    const {register, error} = registerPhotographer()
+
 
     const rules = [
         {
@@ -75,17 +94,16 @@ const RegisterPhotographer = () => {
     const handleSubmit = async ()=>{
         form.validateFields();
         setLoading(true)
-
-        const avatar = await uploadAvatar()
-        const coverPhoto = await uploadCover()
-
-        const user = {fullName, age, email, password, phone, gender, specialization, address, province, amount, basis, bio, avatar, coverPhoto}
         try{
-            await registerPhotographer(user);
-            navigate('/', {state:{message: "Congratulation! You are a member of the squad!"}})
+            const avatar = await uploadAvatar()
+            const coverPhoto = await uploadCover()
+            const user = {fullName, age, email, password, phone, gender, specialization, address, province, amount, basis, bio, avatar, coverPhoto}
+            await register(user);
             setLoading(false)
-        }catch{
+        }catch(err){
             console.log("Cannot connect to the server!")
+            console.log(err)
+            setLoading(false)
         }
     }
 
@@ -117,8 +135,8 @@ const RegisterPhotographer = () => {
         try {
           const response = await axios.post('https://api.cloudinary.com/v1_1/dja7lj7ax/image/upload', coverData);
           return response.data.url;
-        } catch (error) {
-          console.error(error);
+        } catch (err) {
+          console.error(err);
         }
     }
 
@@ -126,26 +144,12 @@ const RegisterPhotographer = () => {
 
 
 
-    const [fullName, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [age, setAge] = useState('');
-    const [phone, setPhone] = useState('');
-    const [gender, setGender] = useState('');
-    const [address, setAddress] = useState('');
-    const [province, setProvince] = useState('');
-    const [specialization, setSpecialization] = useState('');
-    const [amount, setAmount] = useState('');
-    const [basis, setBasis] = useState('');
-    const [bio, setBio] = useState('');
-    const[avatarData,setAvatarData] = useState();
-    const[coverData,setCoverData] = useState();
-    const [loading, setLoading] = useState(false)
-    const [form] = Form.useForm();
+
 
 
     return ( 
         <FormWrapper>
+        {error && <Alert message={error} type="error" />}
         <StyledForm>
             <Form
             form={form}
