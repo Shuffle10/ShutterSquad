@@ -166,7 +166,7 @@ const RegisterPhotographer = () => {
                 <InputNumber min={16} max={80} value={age} onChange={(e)=>setAge(e)}/>
                 </Form.Item>
                 <Form.Item label="Phone Number" rules={rules} name="phone">
-                <Input value={phone} onChange={(e)=>setPhone(e.target.value)} name="phone"/>
+                <Input value={phone} onChange={(e)=>setPhone(e.target.value)} minLength={10} maxLength={10} name="phone"/>
                 </Form.Item>
                 <Form.Item label="Gender" rules={rules} name="gender">
                 <Radio.Group value={gender} onChange={(e)=>setGender(e.target.value)} name="gender">
@@ -228,18 +228,22 @@ const RegisterPhotographer = () => {
                 <TextArea placeholder="300 characters or less" maxLength={300} value={bio} onChange={(e)=>setBio(e.target.value)}/>
                 </FormItem>
                 <Form.Item label="Upload" valuePropName="fileList" rules={rules}>
+                <FormItem name="avatar" required={true}>
                 <Upload action="/" beforeUpload={updateAvatar}  accept="image/png, image/jpeg" listType="picture-card" maxCount={1} >
                     <div>
                     <PlusOutlined style={{color: "white"}} />
                     <div style={{marginTop: 8, color: "white"}}>Profile Photo</div>
                     </div>
                 </Upload>
-                <Upload action="/" beforeUpload={updateCover} accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
+                </FormItem>
+                <FormItem name="coverPhoto" required={true}>
+                <Upload action="/"  beforeUpload={updateCover} accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
                     <div>
                     <PlusOutlined style={{color: "white"}}/>
                     <div style={{ marginTop: 8, color: "white"}}>Cover Photo</div>
                     </div>
                 </Upload>
+                </FormItem>
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>

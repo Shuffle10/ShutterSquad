@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 
 
+
 const Home = () => {
     useEffect(() => {
         window.history.replaceState({}, document.title)
@@ -28,7 +29,7 @@ const Home = () => {
         {location.state==null?<></>:<FlashMessage content={location.state.message}/>}
         <HomeBanner/>
         <StyledSection> 
-            <h3 id="guide">Celebrate your story through photography!</h3>
+            <h3 id="user-guide">Celebrate your story through photography!</h3>
             <UserGuide/>
         </StyledSection>
         <StyledSection color={"#f7f7f7"}> 

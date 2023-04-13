@@ -47,7 +47,7 @@ const DatePicker = () => {
     return ( 
         <>
         <div style={wrapperStyle}>
-        <Calendar fullscreen={false} onSelect={handleDateSelect} disabledDate={handleDisableDate}/>
+        <Calendar defaultValue={""} fullscreen={false} onSelect={handleDateSelect} disabledDate={handleDisableDate}/>
         </div>
         {(selectedDate!='')?<Alert  style={{marginTop:"40px"}} type='success' message={`Available: ${selectedDate}`}></Alert>:<></>}
         </>

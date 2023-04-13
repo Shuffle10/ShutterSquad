@@ -22,8 +22,8 @@ min-height: 100vh;
 `
 
 
-const Profile = () => {
-    const {data: profiles, loading} = useFetch();
+const Profile = ({profiles, loading}) => {
+    
 
     
     const {_id} = useParams()

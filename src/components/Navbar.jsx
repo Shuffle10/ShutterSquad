@@ -2,8 +2,7 @@ import { Button } from "antd";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom"
 import * as Scroll from 'react-scroll';
-
-const InternalLink = Scroll.Link;
+import { HashLink as InternalLink } from 'react-router-hash-link';
 
 const NavWrapper = styled.div`
   position: absolute;
@@ -61,19 +60,8 @@ const navigate = useNavigate()
       </div>
       <div className="nav-items">
         <ul>
-          {/* <li className="navlist-items"> <InternalLink to='guide' smooth={true}>User Guide</InternalLink></li> */}
-          {/* <li className="navlist-items"><InternalLink to='about-us' smooth={true}>About Us</InternalLink></li> */}
-
-          <li className="navlist-items"> <span onClick={()=>{
-            navigate("/")
-            window.scrollTo(0,0)
-            window.scrollTo(0,800)
-          }}>User Guide</span></li>
-          <li className="navlist-items"><span onClick={()=>{
-            navigate("/")
-            window.scrollTo(0,0)
-            window.scrollTo(0,2290)
-          }}>About Us</span></li>
+          <li className="navlist-items"> <InternalLink to='/#user-guide' smooth={true}>User Guide</InternalLink></li>
+          <li className="navlist-items"><InternalLink to='/#about-us' smooth={true}>About Us</InternalLink></li>
         <StyledButton><Button type="primary"><Link to='/register'>Register</Link></Button></StyledButton>
         <StyledButton><Button type="primary"><Link to='/login'>Login</Link></Button></StyledButton>
         </ul>
