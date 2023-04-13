@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom"
 import * as Scroll from 'react-scroll';
 import { HashLink as InternalLink } from 'react-router-hash-link';
 import { logoutUser } from "../services/clientAPI";
+import { useAuthContext } from "../hooks/useContext";
 
 const NavWrapper = styled.div`
   position: absolute;
@@ -51,6 +52,8 @@ const StyledButton = styled.div`
 
 const Navbar = () => {
 
+const {user} = useAuthContext()
+
 const {logout} = logoutUser()
 
 const handleLogout = () => {
@@ -69,9 +72,12 @@ const navigate = useNavigate()
         <ul>
           <li className="navlist-items"> <InternalLink to='/#user-guide' smooth={true}>User Guide</InternalLink></li>
           <li className="navlist-items"><InternalLink to='/#about-us' smooth={true}>About Us</InternalLink></li>
-        <StyledButton><Button type="primary" onClick={handleLogout}>Logout</Button></StyledButton>
+          {user && <>
+          <li className="navlist-items">{user.registeredEmail}</li>
+        <StyledButton><Button type="primary" onClick={handleLogout}>Logout</Button></StyledButton></>}
+        {!user && <>
         <StyledButton><Button type="primary"><Link to='/register'>Register</Link></Button></StyledButton>
-        <StyledButton><Button type="primary"><Link to='/login'>Login</Link></Button></StyledButton>
+        <StyledButton><Button type="primary"><Link to='/login'>Login</Link></Button></StyledButton></>}
         </ul>
       </div>
       </nav>
