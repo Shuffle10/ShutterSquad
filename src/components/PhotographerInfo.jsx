@@ -1,11 +1,13 @@
 import {StyledSection} from "./StyledSection";
 import { Layout, Avatar, Row, Col, Divider, Space, Button } from 'antd';
 import { Link } from "react-router-dom";
-import { LeftOutlined, EditOutlined } from "@ant-design/icons";
+import { LeftOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import PortfolioDisplay from "./PortfolioDisplay";
 import DatePicker from "./DatePicker";
 import ContactCard from "./ContactCard";
 import styled from "styled-components";
+import { useAuthContext } from "../hooks/useContext";
+
 
 const {Sider, Content} = Layout;
 
@@ -18,10 +20,12 @@ const StyledButton = styled.div`
 `
 
 
+
 const PhotographerInfo = ({profile}) => {
+    const {user} = useAuthContext()
     return ( 
         <>
-                            <StyledSection>
+                    <StyledSection>
                     <Layout>
                     <Content style={{borderRight: "1px solid rgba(0,0,0,0.1)", minHeight: 280, padding: '30px'}}>
                     <Space direction="vertical" size={30} style={{ display: 'flex'}}>
@@ -32,7 +36,12 @@ const PhotographerInfo = ({profile}) => {
                             <Space direction="vertical" size={10}>
                             <h2>Hi, my name is {profile.fullName}.</h2>
                             <p style={{fontSize:"15px"}}>{profile.bio}</p>
-                            <StyledButton><Button type="primary"><Link to={`/edit/${profile._id}`}><EditOutlined /> &nbsp;&nbsp;Edit Profile</Link></Button></StyledButton>
+                            
+                            {user && (user.email==profile.email) &&
+                            <div style={{display:"flex", gap: "15px"}}>
+                            <StyledButton><Button type="primary" style={{backgroundColor:"#5cad5c"}}><Link to={`/edit/${profile._id}`}><EditOutlined /> &nbsp;&nbsp;Edit Profile</Link></Button></StyledButton>
+                            <StyledButton><Button type="primary" style={{backgroundColor:"#eb4034"}}><DeleteOutlined/> &nbsp;&nbsp;Delete Profile</Button></StyledButton>
+                            </div>}
                             </Space>
                         </Col>
                         </Row>

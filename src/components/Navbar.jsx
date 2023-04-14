@@ -1,7 +1,6 @@
 import { Button } from "antd";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom"
-import * as Scroll from 'react-scroll';
 import { HashLink as InternalLink } from 'react-router-hash-link';
 import { logoutUser } from "../services/clientAPI";
 import { useAuthContext } from "../hooks/useContext";
@@ -65,15 +64,15 @@ const navigate = useNavigate()
   return ( 
      <NavWrapper>
       <nav>
-      <div className="logo-container">
-        <Link to="/"> ShutterSquad </Link>
+      <div className="logo-container" style={{fontSize:"24px", display:"flex", alignItems:"center"}}>
+        <img src={`${import.meta.env.BASE_URL}/images/Logos/logo.png`} style={{height:"40px"}}/> <Link to="/">  ShutterSquad </Link>
       </div>
       <div className="nav-items">
         <ul>
           <li className="navlist-items"> <InternalLink to='/#user-guide' smooth={true}>User Guide</InternalLink></li>
           <li className="navlist-items"><InternalLink to='/#about-us' smooth={true}>About Us</InternalLink></li>
           {user && <>
-          <li className="navlist-items">{user.registeredEmail}</li>
+          <li className="navlist-items">{user.email}</li>
         <StyledButton><Button type="primary" onClick={handleLogout}>Logout</Button></StyledButton></>}
         {!user && <>
         <StyledButton><Button type="primary"><Link to='/register'>Register</Link></Button></StyledButton>
