@@ -15,8 +15,11 @@ import useFetch from "../hooks/useFetch";
 
 const Home = () => {
     useEffect(() => {
+        window.scrollTo(0, 0);
         window.history.replaceState({}, document.title)
     }, []);
+
+
     
     const {data: profiles, loading} = useFetch();
 

@@ -11,7 +11,6 @@ export const registerPhotographer = () => {
   const register = async (data) => {
     try {
       const response = await axios.post(`${URL}/api/user/register`, data);
-      console.log(response);
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({ type: "LOGIN", payload: response.data });
       navigate("/", {
@@ -22,6 +21,15 @@ export const registerPhotographer = () => {
     }
   };
   return { register, error };
+};
+
+export const updateProfile = async (data, id) => {
+  try {
+    console.log(id);
+    await axios.put(`${URL}/api/user/update/${id}`, data);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const loginPhotographer = () => {

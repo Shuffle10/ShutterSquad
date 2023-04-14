@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import PhotographerInfo from "./PhotographerInfo";
-import { useEffect } from "react";
-import useFetch from "../hooks/useFetch";
+import { useEffect, useState } from "react";
 import { Spin } from "antd";
+import axios from "axios";
 
 
 
@@ -20,23 +20,41 @@ const CoverWrapper = styled.div`
 const PageWrapper = styled.div`
 min-height: 100vh;
 `
+const SpinWrapper = styled.div`
+    min-height: 100vh;
+    min-width: 100vq;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 
 
-const Profile = ({profiles, loading}) => {
+const Profile = () => {
     
+    
+    const [profile, setProfile] = useState();
 
     
     const {_id} = useParams()
-    useEffect(() => {
-        window.scrollTo(0, 0);
-      }, []);
 
+    
+  useEffect(() => {
+    window.scrollTo(0, 0);
+        async function fetchPhotographer() {
+      const response = await axios.get(`http://localhost:8000/api/photographer/${_id}`);
+      setProfile(response.data);
+    }
+    fetchPhotographer();
+  }, [_id]);
 
+  if (!profile) {
+    return <PageWrapper> <SpinWrapper><Spin size="large"></Spin></SpinWrapper> </PageWrapper>
+  }
 
     return ( 
         <PageWrapper>
 
-            {(profiles.filter((e)=>e._id==_id)).map((profile)=>(
+
                 <>
                 <CoverWrapper>
                 <img src={profile.coverPhoto}/>
@@ -45,7 +63,6 @@ const Profile = ({profiles, loading}) => {
                         <PhotographerInfo profile={profile}/>
                 
                 </>
-            ))}
 
         </PageWrapper>
      );

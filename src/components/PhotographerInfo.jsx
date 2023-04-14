@@ -1,14 +1,21 @@
 import {StyledSection} from "./StyledSection";
-import { Layout, Avatar, Row, Col, Divider, Space } from 'antd';
+import { Layout, Avatar, Row, Col, Divider, Space, Button } from 'antd';
 import { Link } from "react-router-dom";
-import { LeftOutlined } from "@ant-design/icons";
+import { LeftOutlined, EditOutlined } from "@ant-design/icons";
 import PortfolioDisplay from "./PortfolioDisplay";
 import DatePicker from "./DatePicker";
 import ContactCard from "./ContactCard";
+import styled from "styled-components";
 
 const {Sider, Content} = Layout;
 
-
+const StyledButton = styled.div`
+  .ant-btn{
+    height: 35px;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+  }
+`
 
 
 const PhotographerInfo = ({profile}) => {
@@ -25,6 +32,7 @@ const PhotographerInfo = ({profile}) => {
                             <Space direction="vertical" size={10}>
                             <h2>Hi, my name is {profile.fullName}.</h2>
                             <p style={{fontSize:"15px"}}>{profile.bio}</p>
+                            <StyledButton><Button type="primary"><Link to={`/edit/${profile._id}`}><EditOutlined /> &nbsp;&nbsp;Edit Profile</Link></Button></StyledButton>
                             </Space>
                         </Col>
                         </Row>

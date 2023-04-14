@@ -12,6 +12,7 @@ import Profile from './components/Profile'
 import ErrorPage from './components/ErrorPage'
 import SearchResults from './components/SearchResults'
 import useFetch from './hooks/useFetch'
+import EditProfile from './components/EditProfile'
 
 
 
@@ -52,8 +53,9 @@ function App() {
           <Route exact path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<RegisterPhotographer/>}/>
-          <Route path='/profile/:_id' element={<Profile profiles={profiles} loading={loading}/>}/>
-          <Route path='/search' element={<SearchResults profiles={profiles} loading={loading}/>}/>
+          <Route path='/profile/:_id' element={<Profile/>}/>
+          <Route path='/edit/:_id' element={<EditProfile/>}/>
+          <Route path='/search' element={<SearchResults/>}/>
           <Route path='/search/:province' element={<SearchResults profiles={profiles} loading={loading}/>}/>
           <Route path='*' element={<ErrorPage/>}/>
         </Routes>
