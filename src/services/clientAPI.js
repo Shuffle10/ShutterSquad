@@ -2,7 +2,7 @@ import axios from "axios";
 import { useAuthContext } from "../hooks/useContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-const URL = "http://localhost:8000";
+const URL = "https://shuttersquad-server.onrender.com";
 
 export const registerPhotographer = () => {
   const navigate = useNavigate();

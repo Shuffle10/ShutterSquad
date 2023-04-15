@@ -41,7 +41,7 @@ const Profile = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
         async function fetchPhotographer() {
-      const response = await axios.get(`http://localhost:8000/api/photographer/${_id}`);
+      const response = await axios.get(`https://shuttersquad-server.onrender.com/api/photographer/${_id}`);
       setProfile(response.data);
     }
     fetchPhotographer();

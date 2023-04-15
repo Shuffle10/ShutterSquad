@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Spin, Form, Input, InputNumber, Radio, Select, Upload, Button, message } from "antd";
-import { PlusOutlined,  } from '@ant-design/icons';
+import { PlusOutlined, MinusCircleOutlined  } from '@ant-design/icons';
 import { Link} from "react-router-dom";
 import FormItem from "antd/es/form/FormItem";
 import axios from "axios";
@@ -67,6 +67,38 @@ const StyledForm = styled.div`
   }
 `
 
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 4,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 20,
+    },
+  },
+};
+
+const formItemLayoutWithOutLabel = {
+  wrapperCol: {
+    xs: {
+      span: 10,
+      offset: 6,
+    },
+    sm: {
+      span: 14,
+      offset: 6,
+    },
+  },
+};
+
 
 const EditProfile = () => {
     const [profile, setProfile] = useState();
@@ -83,6 +115,8 @@ const EditProfile = () => {
     const[avatarData,setAvatarData] = useState();
     const[coverData,setCoverData] = useState();
     const [loading, setLoading] = useState(false);
+    const [link, setLink] = useState('');
+    const [portfolio, setPortfolio] = useState([]);
     const [form] = Form.useForm();
     const navigate = useNavigate()
 
@@ -96,11 +130,20 @@ const EditProfile = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
             async function fetchPhotographer() {
-          const response = await axios.get(`http://localhost:8000/api/photographer/${_id}`);
+          const response = await axios.get(`https://shuttersquad-server.onrender.com/api/photographer/${_id}`);
           setProfile(response.data);
         }
         fetchPhotographer();
       }, [_id]);
+
+      const addLink = async () => {
+        link.length>0 && setPortfolio([...portfolio, link])
+      }
+
+      const updateLink = async (value) => {
+        setLink(value)
+      }
+
 
       const handleSubmit = async ()=>{
         form.validateFields();
@@ -108,17 +151,17 @@ const EditProfile = () => {
         try{
             // const avatar = await uploadAvatar()
             // const coverPhoto = await uploadCover()
-            const user = {fullName, age, phone, gender, specialization, address, province, amount, basis, bio}
+            const user = {fullName, age, phone, gender, specialization, address, province, amount, basis, bio, portfolio}
             for (let value in user){
               if(user[value]==''){
                 user[value] = profile[value]
               }
             }
+            await addLink()
             await updateProfile(user, _id);
             navigate("/", {
               state: { message: "Profile Updated!" },
             })
-            console.log(user)
             setLoading(false)
         }catch(err){
             console.log("Cannot connect to the server!")
@@ -261,12 +304,63 @@ const EditProfile = () => {
                 </Upload>
                 </FormItem>
                 </Form.Item>
-
+                <Form.List name="links">
+              {(fields, { add, remove }, { errors }) => (
+          <>
+            {fields.map((field, index) => (
+              <Form.Item
+                {...(index === 0 ? layout : formItemLayoutWithOutLabel)}
+                label={index === 0 ? 'Portfolio Links' : ''}
+                required={false}
+                key={field.key}
+              >
+                <Form.Item
+                  {...field}
+                  validateTrigger={['onChange', 'onBlur']}
+                  noStyle
+                >
+                  <Input
+                    placeholder="Add Image Link"
+                    id="linkInput"
+                    onChange={async (e)=>{
+                      await updateLink(e.target.value)
+                    }}
+                  />
+                </Form.Item>
+                {fields.length > 1 ? (
+                  <MinusCircleOutlined
+                    className="dynamic-delete-button"
+                    onClick={() => remove(field.name)}
+                  />
+                ) : null}
+              </Form.Item>
+            ))}
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
+              <Button
+                type="dashed"
+                onClick={ async ()=>{
+                  await addLink()
+                  add()
+                }}
+                style={{
+                  width: '60%',
+                }}
+                icon={<PlusOutlined />}
+              >
+                Add New Portfolio Link
+              </Button>
+              </Form.Item>
+              <Form.ErrorList errors={errors} />
+                </>
+        )}
+      </Form.List>
+          
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
                 <Button block type="primary" htmlType="submit" loading={loading}>
                     Update
                 </Button>
                 </Form.Item>
+
             </Form>
         </StyledForm>
         </FormWrapper>
