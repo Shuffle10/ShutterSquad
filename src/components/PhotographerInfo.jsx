@@ -1,13 +1,14 @@
 import {StyledSection} from "./StyledSection";
-import { Layout, Avatar, Row, Col, Divider, Space, Button } from 'antd';
-import { Link } from "react-router-dom";
+import { Layout, Avatar, Row, Col, Divider, Space, Button, message } from 'antd';
+import { Link, useNavigate } from "react-router-dom";
 import { LeftOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import PortfolioDisplay from "./PortfolioDisplay";
 import DatePicker from "./DatePicker";
 import ContactCard from "./ContactCard";
 import styled from "styled-components";
 import { useAuthContext } from "../hooks/useContext";
-
+import { useState } from "react";
+import { deleteProfile, logoutUser } from "../services/clientAPI";
 
 const {Sider, Content} = Layout;
 
@@ -21,8 +22,34 @@ const StyledButton = styled.div`
 
 
 
+
 const PhotographerInfo = ({profile}) => {
+    
     const {user} = useAuthContext()
+    const {deleteUser} = deleteProfile()
+    const {logout} = logoutUser()
+
+    const navigate = useNavigate()
+
+
+    const [loading, setLoading] = useState(false)
+    
+    const handleDelete = async (id) => {
+        setLoading(true)
+        try{
+            await deleteUser(id)
+            logout()
+            navigate("/", {
+                state: { message: "Profile Deleted!" },
+              });
+            setLoading(false)
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+
+
     return ( 
         <>
                     <StyledSection>
@@ -40,7 +67,7 @@ const PhotographerInfo = ({profile}) => {
                             {user && (user.email==profile.email) &&
                             <div style={{display:"flex", gap: "15px"}}>
                             <StyledButton><Button type="primary" style={{backgroundColor:"#5cad5c"}}><Link to={`/edit/${profile._id}`}><EditOutlined /> &nbsp;&nbsp;Edit Profile</Link></Button></StyledButton>
-                            <StyledButton><Button type="primary" style={{backgroundColor:"#eb4034"}}><DeleteOutlined/> &nbsp;&nbsp;Delete Profile</Button></StyledButton>
+                            <StyledButton><Button type="primary" style={{backgroundColor:"#eb4034"}} onClick={()=>handleDelete(profile._id)} loading={loading}><DeleteOutlined /> &nbsp;&nbsp;Delete Profile</Button></StyledButton>
                             </div>}
                             </Space>
                         </Col>

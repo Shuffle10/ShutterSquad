@@ -59,7 +59,6 @@ const handleLogout = () => {
   logout()
 }
 
-const navigate = useNavigate()
 
   return ( 
      <NavWrapper>

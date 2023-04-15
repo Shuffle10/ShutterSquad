@@ -25,7 +25,6 @@ export const registerPhotographer = () => {
 
 export const updateProfile = async (data, id) => {
   try {
-    console.log(id);
     await axios.put(`${URL}/api/user/update/${id}`, data);
   } catch (err) {
     console.log(err);
@@ -39,7 +38,6 @@ export const loginPhotographer = () => {
   const login = async (data) => {
     try {
       const response = await axios.post(`${URL}/api/user/login`, data);
-      console.log(response);
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({ type: "LOGIN", payload: response.data });
       navigate("/");
@@ -52,11 +50,23 @@ export const loginPhotographer = () => {
 
 export const logoutUser = () => {
   const { dispatch } = useAuthContext();
-  const logout = () => {
+  const logout = async () => {
     localStorage.removeItem("user");
     dispatch({ type: "LOGOUT" });
   };
   return { logout };
+};
+
+export const deleteProfile = () => {
+  const navigate = useNavigate();
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`${URL}/api/user/delete/${id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  return { deleteUser };
 };
 
 export const getPhotographers = async (data) => {
