@@ -21,7 +21,7 @@ const DatePicker = () => {
     const { token } = theme.useToken();
 
     const wrapperStyle = {
-      width: 300,
+      width: "100%",
       border: `1px solid ${token.colorBorderSecondary}`,
       borderRadius: token.borderRadiusLG,
     };
@@ -47,7 +47,7 @@ const DatePicker = () => {
     return ( 
         <>
         <div style={wrapperStyle}>
-        <Calendar defaultValue={""} fullscreen={false} onSelect={handleDateSelect} disabledDate={handleDisableDate}/>
+        <Calendar defaultValue={""} fullscreen={false}  onSelect={handleDateSelect} disabledDate={handleDisableDate}/>
         </div>
         {(selectedDate!='')?<Alert  style={{marginTop:"40px"}} type='success' message={`Available: ${selectedDate}`}></Alert>:<></>}
         </>
