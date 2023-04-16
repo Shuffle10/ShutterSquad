@@ -33,7 +33,7 @@ const StyledForm = styled.div`
     }
 
     .ant-form{
-        width: 700px;
+        width: 850px;
         background: rgba(0,0,0,0.3);
         // margin: 60px auto;
         padding: 40px;
@@ -107,14 +107,14 @@ const RegisterPhotographer = () => {
         }
     }
 
-    const updateAvatar = (file) => {
+    const updateAvatar = async (file) => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', 'ss_images');
         setAvatarData(formData)
     }
 
-    const updateCover = (file) => {
+    const updateCover = async (file) => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', 'ss_images');
@@ -201,11 +201,17 @@ const RegisterPhotographer = () => {
                     <Select.Option value="Both">Both</Select.Option>
                 </Select>
                 </Form.Item>
-                <Form.Item label="Charge" name="charge" rules={rules}>
+                <Form.Item label="Charge" name="charge" required={true}>
                 <Input.Group compact>
                 <Form.Item
                     name={["charge","amount"]}
                     noStyle
+                    rules={[
+                        {
+                          required: true,
+                          message: 'Enter Amount',
+                        },
+                      ]}
                     >
                 <InputNumber
                     style={{
@@ -220,6 +226,12 @@ const RegisterPhotographer = () => {
                     <Form.Item
                     name={["charge","basis"]}
                     noStyle
+                    rules={[
+                        {
+                          required: true,
+                          message: 'Enter payment basis',
+                        },
+                      ]}
                     >
                     <Select placeholder="Basis" value={basis} onChange={(e)=>setBasis(e)}>
                     <Select.Option value="day">Day</Select.Option>
@@ -231,24 +243,24 @@ const RegisterPhotographer = () => {
                 <FormItem label="Bio" name="bio" rules={rules}>
                 <TextArea placeholder="300 characters or less" maxLength={300} value={bio} onChange={(e)=>setBio(e.target.value)}/>
                 </FormItem>
-                <Form.Item label="Upload" valuePropName="fileList" rules={rules}>
-                <FormItem name="avatar" required={true}>
-                <Upload action="/" beforeUpload={updateAvatar}  accept="image/png, image/jpeg" listType="picture-card" maxCount={1} >
+                {/* <Form.Item label="Upload" valuePropName="fileList"> */}
+                <FormItem label="Upload Avatar" name="avatar" rules={rules} >
+                <Upload action="/" beforeUpload={async (f) => await updateAvatar(f)}  accept="image/png, image/jpeg" listType="picture-card" maxCount={1} >
                     <div>
                     <PlusOutlined style={{color: "white"}} />
                     <div style={{marginTop: 8, color: "white"}}>Profile Photo</div>
                     </div>
                 </Upload>
                 </FormItem>
-                <FormItem name="coverPhoto" required={true}>
-                <Upload action="/"  beforeUpload={updateCover} accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
+                <FormItem label="Upload Cover"  name="coverPhoto" rules={rules} >
+                <Upload action="/"  beforeUpload={async (f) => await updateCover(f)} accept="image/png, image/jpeg" listType="picture-card" maxCount={1}>
                     <div>
                     <PlusOutlined style={{color: "white"}}/>
                     <div style={{ marginTop: 8, color: "white"}}>Cover Photo</div>
                     </div>
                 </Upload>
                 </FormItem>
-                </Form.Item>
+                {/* </Form.Item> */}
 
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 6 }}>
                 <Button block type="primary" htmlType="submit" loading={loading}>
